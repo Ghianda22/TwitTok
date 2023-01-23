@@ -8,16 +8,21 @@
     <fragment
         android:id="@+id/nav_direction_followed"
         android:name="com.example.twittok.ui.followed.FollowedFragment"
-        android:label="Followed"
+        android:label="@string/nav_menu_item_followed"
         tools:layout="@layout/fragment_followed" />
     <fragment
         android:id="@+id/nav_direction_newtwok"
         android:name="com.example.twittok.ui.newtwok.NewTwokFragment"
-        android:label="New Twok"
+        android:label="@string/nav_menu_item_newtwok"
         tools:layout="@layout/fragment_new_twok" />
     <fragment
         android:id="@+id/nav_direction_home"
         android:name="com.example.twittok.ui.home.HomeFragment"
-        android:label="Home"
+        android:label="@string/nav_menu_item_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_direction_profile"
+        android:name="com.example.twittok.ui.profile.ProfileFragment"
+        android:label="@string/nav_menu_item_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
