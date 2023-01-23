@@ -9,7 +9,11 @@
         android:id="@+id/nav_direction_followed"
         android:name="com.example.twittok.ui.followed.FollowedFragment"
         android:label="@string/nav_menu_item_followed"
-        tools:layout="@layout/fragment_followed" />
+        tools:layout="@layout/fragment_followed" >
+        <action
+            android:id="@+id/action_nav_direction_followed_to_userBoardFragment"
+            app:destination="@id/userBoardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_direction_newtwok"
         android:name="com.example.twittok.ui.newtwok.NewTwokFragment"
@@ -19,10 +23,19 @@
         android:id="@+id/nav_direction_home"
         android:name="com.example.twittok.ui.home.HomeFragment"
         android:label="@string/nav_menu_item_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_direction_home_to_userBoardFragment"
+            app:destination="@id/userBoardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_direction_profile"
         android:name="com.example.twittok.ui.profile.ProfileFragment"
         android:label="@string/nav_menu_item_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/userBoardFragment"
+        android:name="com.example.twittok.ui.userboard.UserBoardFragment"
+        android:label="fragment_user_board"
+        tools:layout="@layout/fragment_user_board" />
 </navigation>
