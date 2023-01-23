@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_direction_home">
 
+    <fragment
+        android:id="@+id/nav_direction_followed"
+        android:name="com.example.twittok.ui.followed.FollowedFragment"
+        android:label="Followed"
+        tools:layout="@layout/fragment_followed" />
+    <fragment
+        android:id="@+id/nav_direction_newtwok"
+        android:name="com.example.twittok.ui.newtwok.NewTwokFragment"
+        android:label="New Twok"
+        tools:layout="@layout/fragment_new_twok" />
+    <fragment
+        android:id="@+id/nav_direction_home"
+        android:name="com.example.twittok.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
 </navigation>
