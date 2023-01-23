@@ -37,8 +37,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Integer uid = 23151;
         binding.button.setOnClickListener(clickedView -> {
-            NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToUserBoardFragment();
+            NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToUserBoardFragment(uid);
             Navigation.findNavController(clickedView).navigate(action);
         });
     }

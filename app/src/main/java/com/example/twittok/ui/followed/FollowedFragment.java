@@ -40,8 +40,9 @@ public class FollowedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Integer uid = 23151;
         binding.button.setOnClickListener(clickedView -> {
-            NavDirections action = FollowedFragmentDirections.actionNavDirectionFollowedToUserBoardFragment();
+            NavDirections action = FollowedFragmentDirections.actionNavDirectionFollowedToUserBoardFragment(uid);
             Navigation.findNavController(clickedView).navigate(action);
         });
     }
