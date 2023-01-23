@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.newtwok.NewTwokFragment">
+    tools:context=".ui.userboard.UserBoardFragment">
 
     <TextView
+        android:id="@+id/tv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="New Twok" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

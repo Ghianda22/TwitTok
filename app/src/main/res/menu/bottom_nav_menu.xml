@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_direction_profile"
+        android:title="@string/nav_menu_item_profile" />
+    <item
+        android:id="@+id/nav_direction_home"
+        android:title="@string/nav_menu_item_home" />
+    <item
+        android:id="@+id/nav_direction_followed"
+        android:title="@string/nav_menu_item_followed" />
+    <item
+        android:id="@+id/nav_direction_newtwok"
+        android:title="@string/nav_menu_item_newtwok" />
+</menu>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_direction_home">
+
+    <fragment
+        android:id="@+id/nav_direction_followed"
+        android:name="com.example.twittok.ui.followed.FollowedFragment"
+        android:label="@string/nav_menu_item_followed"
+        tools:layout="@layout/fragment_followed" >
+        <action
+            android:id="@+id/action_nav_direction_followed_to_userBoardFragment"
+            app:destination="@id/userBoardFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_direction_newtwok"
+        android:name="com.example.twittok.ui.newtwok.NewTwokFragment"
+        android:label="@string/nav_menu_item_newtwok"
+        tools:layout="@layout/fragment_new_twok" />
+
+    <fragment
+        android:id="@+id/nav_direction_home"
+        android:name="com.example.twittok.ui.home.HomeFragment"
+        android:label="@string/nav_menu_item_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_direction_home_to_userBoardFragment"
+            app:destination="@id/userBoardFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_direction_profile"
+        android:name="com.example.twittok.ui.profile.ProfileFragment"
+        android:label="@string/nav_menu_item_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/userBoardFragment"
+        android:name="com.example.twittok.ui.userboard.UserBoardFragment"
+        android:label="User Board"
+        tools:layout="@layout/fragment_user_board" >
+        <argument
+            android:name="selectedUser"
+            app:argType="integer" />
+    </fragment>
+</navigation>

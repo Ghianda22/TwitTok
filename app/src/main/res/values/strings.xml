@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Twit Tok</string>
+    <string name="nav_menu_item_followed">Followed</string>
+    <string name="nav_menu_item_newtwok">New Twok</string>
+    <string name="nav_menu_item_home">Home</string>
+    <string name="nav_menu_item_profile">My Profile</string>
 </resources>
