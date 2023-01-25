@@ -40,6 +40,8 @@ public class FollowedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //NAVIGATION - experiment to test values passing in an action
+        //TODO - pass the uid of the selected user
         Integer uid = 23151;
         binding.button.setOnClickListener(clickedView -> {
             NavDirections action = FollowedFragmentDirections.actionNavDirectionFollowedToUserBoardFragment(uid);

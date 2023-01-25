@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.twittok.databinding.ActivityMainBinding;
+import com.example.twittok.datasource.NetworkDataSource;
+import com.example.twittok.datasource.RequestBody;
 import com.example.twittok.repositories.SidRepository;
 
 import retrofit2.Call;
@@ -35,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfig);
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
 
+
+        //RETROFIT TESTING
+        RequestBody body = new RequestBody(513802);
+//        NetworkDataSource.callGetProfile(new RequestBody());
+//        NetworkDataSource.callSetProfile(body);
+//        NetworkDataSource.callFollow(body);
+        NetworkDataSource.callGetTwok(body);
 
     }
 

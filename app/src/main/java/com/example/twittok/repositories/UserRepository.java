@@ -49,4 +49,15 @@ public class UserRepository {
     public void setPversion(Integer pversion) {
         this.pversion = pversion;
     }
+
+    @Override
+    public String toString() {
+        return "\nUserRepository{" +
+                "\n    uid=" + uid +
+                ", \n    sid='" + sid + '\'' +
+                ", \n    name='" + name + '\'' +
+                ", \n    picture='" + picture + '\'' +
+                ", \n    pversion=" + pversion +
+                "\n}";
+    }
 }
