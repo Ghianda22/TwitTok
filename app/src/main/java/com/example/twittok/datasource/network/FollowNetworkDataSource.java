@@ -13,22 +13,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FollowNetworkDataSource {
-    private static ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
+    private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "FOLLOW_network";
     //todo add listener
 
     //sid, uid
     public static void callFollow(RequestBody body) {
         Call<Object> followCall = apiInterface.follow(body);
-        followCall.enqueue(new Callback<Object>()   {
+        followCall.enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
-                Log.d(TAG, "onResponse: " + response.code());
+
+                Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
             }
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
 
@@ -39,12 +40,13 @@ public class FollowNetworkDataSource {
         unfollowCall.enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
-                Log.d(TAG, "onResponse: " + response.code());
+
+                Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
             }
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
 
@@ -56,12 +58,13 @@ public class FollowNetworkDataSource {
         getFollowedCall.enqueue(new Callback<UserRepository[]>() {
             @Override
             public void onResponse(Call<UserRepository[]> call, Response<UserRepository[]> response) {
+                Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body().length);
             }
 
             @Override
             public void onFailure(Call<UserRepository[]> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
 
@@ -73,12 +76,13 @@ public class FollowNetworkDataSource {
         isFollowedCall.enqueue(new Callback<IsFollowed>() {
             @Override
             public void onResponse(Call<IsFollowed> call, Response<IsFollowed> response) {
-                Log.d(TAG, "onResponse: " + response.body().getFollowed());
+                Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
+                Log.d(TAG, "onResponse: " + response.body());
             }
 
             @Override
             public void onFailure(Call<IsFollowed> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
 

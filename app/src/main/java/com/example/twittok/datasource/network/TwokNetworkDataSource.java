@@ -12,7 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TwokNetworkDataSource {
-    private static ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
+    private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "TWOK_network";
     //todo add listener
 
@@ -23,12 +23,13 @@ public class TwokNetworkDataSource {
         getTwokCall.enqueue(new Callback<TwokRepository>() {
             @Override
             public void onResponse(Call<TwokRepository> call, Response<TwokRepository> response) {
+                Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
             }
 
             @Override
             public void onFailure(Call<TwokRepository> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
 
@@ -40,12 +41,12 @@ public class TwokNetworkDataSource {
         addTwokCall.enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
-                Log.d(TAG, "onResponse: " + response.code());
+                Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
             }
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
 

@@ -35,8 +35,6 @@ public class SidNetworkDataSource {
 
             @Override
             public void onFailure(Call<SidRepository> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getMessage());
-                t.printStackTrace();
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });

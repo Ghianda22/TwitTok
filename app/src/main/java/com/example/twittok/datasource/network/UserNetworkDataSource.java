@@ -12,7 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserNetworkDataSource {
-    private static ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
+    private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "USER_network";
     //todo add listener
 
@@ -22,6 +22,7 @@ public class UserNetworkDataSource {
         getProfile.enqueue(new Callback<UserRepository>() {
             @Override
             public void onResponse(Call<UserRepository> call, Response<UserRepository> response) {
+                Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
             }
 
@@ -41,8 +42,6 @@ public class UserNetworkDataSource {
             public void onResponse(Call<Object> call, Response<Object> response) {
                 Log.d(TAG, "onResponse: " + response.body());
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
-                Log.d(TAG, "onResponse: " + response.raw());
-                callGetProfile(new RequestBody());
             }
 
             @Override
@@ -58,12 +57,13 @@ public class UserNetworkDataSource {
         getPictureCall.enqueue(new Callback<UserRepository>() {
             @Override
             public void onResponse(Call<UserRepository> call, Response<UserRepository> response) {
+                Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
             }
 
             @Override
             public void onFailure(Call<UserRepository> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
 
