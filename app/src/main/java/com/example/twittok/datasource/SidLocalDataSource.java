@@ -5,19 +5,20 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.twittok.MainActivity;
+import com.example.twittok.datasource.network.config.ContextSupplier;
 import com.example.twittok.repositories.SidRepository;
 
 //key-value local data source
 public class SidLocalDataSource {
-    private Context context;
+    private final Context context;
     private static final String SID_FILENAME = "com.example.twittok.PREFERENCE_FILE_SID";
     private static final String SID_KEY = "sid";
     private static final String TAG = "SID_SHARED_PREF";
 
     //todo add listener to notify the succesfully saved data
 
-    public SidLocalDataSource(Context context) {
-        this.context = context;
+    public SidLocalDataSource() {
+        this.context = ContextSupplier.getContext();
     }
 
     public void saveSid(SidRepository sid){
