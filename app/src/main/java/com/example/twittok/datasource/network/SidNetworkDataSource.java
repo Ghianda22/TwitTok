@@ -19,13 +19,13 @@ public class SidNetworkDataSource {
     private static final String TAG = "SID_network";
     //todo add listener
 
-    public static void callRegister(Context context) {
+    public static void callRegister() {
         Call<SidRepository> registerCall = apiInterface.register();
         registerCall.enqueue(new Callback<SidRepository>() {
             @Override
             public void onResponse(@NonNull Call<SidRepository> call, @NonNull Response<SidRepository> response) {
                 Log.d(TAG, "onCreate: SID VALUE: " + response.body().getSid());
-                SidLocalDataSource sidLocalDataSource = new SidLocalDataSource(context);
+                SidLocalDataSource sidLocalDataSource = new SidLocalDataSource();
                 sidLocalDataSource.saveSid(response.body());
             }
 
