@@ -1,17 +1,5 @@
-package com.example.twittok.datasource;
+package com.example.twittok.datasource.network.config;
 
-import android.content.Context;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.example.twittok.repositories.IsFollowed;
-import com.example.twittok.repositories.SidRepository;
-import com.example.twittok.repositories.UserRepository;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

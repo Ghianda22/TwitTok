@@ -2,9 +2,9 @@ package com.example.twittok.datasource.network;
 
 import android.util.Log;
 
-import com.example.twittok.datasource.ApiInterface;
-import com.example.twittok.datasource.ConfigNetworkDataSource;
-import com.example.twittok.datasource.RequestBody;
+import com.example.twittok.datasource.network.config.ApiInterface;
+import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
+import com.example.twittok.datasource.network.config.RequestBody;
 import com.example.twittok.repositories.UserRepository;
 
 import retrofit2.Call;

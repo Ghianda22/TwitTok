@@ -1,4 +1,4 @@
-package com.example.twittok.datasource;
+package com.example.twittok.datasource.network.config;
 
 import com.example.twittok.repositories.SidRepository;
 import com.example.twittok.repositories.TwokRepository;

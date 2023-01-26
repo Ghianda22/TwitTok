@@ -5,9 +5,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.twittok.datasource.ApiInterface;
-import com.example.twittok.datasource.ConfigNetworkDataSource;
 import com.example.twittok.datasource.SidLocalDataSource;
+import com.example.twittok.datasource.network.config.ApiInterface;
+import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.repositories.SidRepository;
 
 import retrofit2.Call;
