@@ -24,11 +24,24 @@ public class RequestBody{
         this.uid = uid;
     }
     // setProfile
+    //can't create 2 constructor like twok ones, they'd be indistinguishable w just 1 string
+    //Am I setting the name or the picture?
+    //Could implement length control in constructor, but it's way more easier to just set one param to null
     public RequestBody(String name, String picture) {
         this.name = name;
         this.picture = picture;
     }
 
+    //addTwok
+    public RequestBody(String text, String bgcol, String fontcol, Integer fontsize, Integer fonttype, Integer halign, Integer valign) {
+        this.text = text;
+        this.bgcol = bgcol;
+        this.fontcol = fontcol;
+        this.fontsize = fontsize;
+        this.fonttype = fonttype;
+        this.halign = halign;
+        this.valign = valign;
+    }
     public RequestBody(String text, String bgcol, String fontcol, Integer fontsize, Integer fonttype, Integer halign, Integer valign, Double lat, Double lon) {
         this.text = text;
         this.bgcol = bgcol;
@@ -40,13 +53,10 @@ public class RequestBody{
         this.lat = lat;
         this.lon = lon;
     }
-    public RequestBody(String text, String bgcol, String fontcol, Integer fontsize, Integer fonttype, Integer halign, Integer valign) {
-        this.text = text;
-        this.bgcol = bgcol;
-        this.fontcol = fontcol;
-        this.fontsize = fontsize;
-        this.fonttype = fonttype;
-        this.halign = halign;
-        this.valign = valign;
-    }
 }
+
+
+
+
+
+
