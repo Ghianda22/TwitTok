@@ -7,8 +7,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.twittok.databinding.ActivityMainBinding;
+import com.example.twittok.datasource.network.SidNetworkDataSource;
+import com.example.twittok.datasource.network.UserNetworkDataSource;
+import com.example.twittok.datasource.network.config.RequestBody;
+import com.example.twittok.repositories.SidRepository;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,11 +40,19 @@ public class MainActivity extends AppCompatActivity {
 //        ConfigNetworkDataSource.callSetProfile(body);
 //        ConfigNetworkDataSource.callFollow(body);
 //        ConfigNetworkDataSource.callGetTwok(body);
+        SidNetworkDataSource sidNetworkDataSource = new SidNetworkDataSource();
+        sidNetworkDataSource.callRegister();
+        sidNetworkDataSource.setOnResponseReadyListener(sid -> {
+            RequestBody requestBody = new RequestBody();
+            UserNetworkDataSource.callGetProfile(requestBody);
+        });
 
         //SHARED PREF TESTING
 //        ConfigNetworkDataSource.callRegister(this);
 //        SidLocalDataSource sidLocalDataSource = new SidLocalDataSource(this);
 //        Log.d(TAG, "onCreate: " + sidLocalDataSource.getSid());
+
+        Log.d(TAG, "onCreate: " + new SidRepository().getSid());
     }
 
     @Override //implements backstack

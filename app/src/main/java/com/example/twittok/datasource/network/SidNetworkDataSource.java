@@ -1,6 +1,5 @@
 package com.example.twittok.datasource.network;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -8,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.twittok.datasource.SidLocalDataSource;
 import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
+import com.example.twittok.listeners.OnResponseReadyListener;
 import com.example.twittok.repositories.SidRepository;
 
 import retrofit2.Call;
@@ -15,18 +15,22 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SidNetworkDataSource {
-    private static ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
+    private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "SID_network";
-    //todo add listener
+    private OnResponseReadyListener onResponseReadyListener;
 
-    public static void callRegister() {
+    public void setOnResponseReadyListener(OnResponseReadyListener onResponseReadyListener) {
+        this.onResponseReadyListener = onResponseReadyListener;
+    }
+
+    public void callRegister() {
         Call<SidRepository> registerCall = apiInterface.register();
         registerCall.enqueue(new Callback<SidRepository>() {
             @Override
             public void onResponse(@NonNull Call<SidRepository> call, @NonNull Response<SidRepository> response) {
                 Log.d(TAG, "onCreate: SID VALUE: " + response.body().getSid());
-                SidLocalDataSource sidLocalDataSource = new SidLocalDataSource();
-                sidLocalDataSource.saveSid(response.body());
+                new SidLocalDataSource().saveSid(response.body());
+                onResponseReadyListener.onSidReady(response.body());
             }
 
             @Override
