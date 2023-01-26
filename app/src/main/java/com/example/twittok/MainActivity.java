@@ -13,6 +13,7 @@ import android.util.Log;
 import com.example.twittok.databinding.ActivityMainBinding;
 import com.example.twittok.datasource.NetworkDataSource;
 import com.example.twittok.datasource.RequestBody;
+import com.example.twittok.datasource.SidLocalDataSource;
 import com.example.twittok.repositories.SidRepository;
 
 import retrofit2.Call;
@@ -39,12 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         //RETROFIT TESTING
-        RequestBody body = new RequestBody(513802);
+//        RequestBody body = new RequestBody(513802);
 //        NetworkDataSource.callGetProfile(new RequestBody());
 //        NetworkDataSource.callSetProfile(body);
 //        NetworkDataSource.callFollow(body);
-        NetworkDataSource.callGetTwok(body);
+//        NetworkDataSource.callGetTwok(body);
 
+        //SHARED PREF TESTING
+//        NetworkDataSource.callRegister(this);
+//        SidLocalDataSource sidLocalDataSource = new SidLocalDataSource(this);
+//        Log.d(TAG, "onCreate: " + sidLocalDataSource.getSid());
     }
 
     @Override //implements backstack
