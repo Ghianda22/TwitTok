@@ -1,5 +1,6 @@
 package com.example.twittok.datasource;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -19,8 +20,6 @@ public class NetworkDataSource {
     private static final String BASE_URL = "https://develop.ewlab.di.unimi.it/mc/twittok/";
     private static final String TAG = "NETWORK_CLASS";
     private static ApiInterface apiInterface = null;
-    private static SidRepository sid;
-
     public static ApiInterface getApiInterface() {
         if (apiInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
@@ -37,14 +36,14 @@ public class NetworkDataSource {
     // ! -> I'd have to modify each file with each call implementation
     // pro: I'd have a class for each object I recive
     //
-    public static void callRegister() {
+    public static void callRegister(Context context) {
         Call<SidRepository> registerCall = getApiInterface().register();
         registerCall.enqueue(new Callback<SidRepository>() {
             @Override
             public void onResponse(@NonNull Call<SidRepository> call, @NonNull Response<SidRepository> response) {
-                sid = response.body();
                 Log.d(TAG, "onCreate: SID VALUE: " + response.body().getSid());
-
+                SidLocalDataSource sidLocalDataSource = new SidLocalDataSource(context);
+                sidLocalDataSource.saveSid(response.body());
             }
 
             @Override
