@@ -39,11 +39,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         //RETROFIT TESTING
-        RequestBody body = new RequestBody(513802);
+        RequestBody body = new RequestBody(31089);
 //        NetworkDataSource.callGetProfile(new RequestBody());
 //        NetworkDataSource.callSetProfile(body);
 //        NetworkDataSource.callFollow(body);
-        NetworkDataSource.callGetTwok(body);
+
+        //LISTENER IMPLEMENTATION
+        NetworkDataSource networkDataSource = new NetworkDataSource();
+        networkDataSource.callFollow(body);
+        networkDataSource.setOnDataReadyListenert(data -> {
+            Log.d(TAG, "onCreate: siamo nel listener" + data);
+            networkDataSource.callIsFollowed(body);
+        });
 
     }
 

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.twittok.listeners.OnDataReadyListener;
 import com.example.twittok.repositories.IsFollowed;
 import com.example.twittok.repositories.SidRepository;
 import com.example.twittok.repositories.TwokRepository;
@@ -16,12 +17,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkDataSource {
-    private static final String BASE_URL = "https://develop.ewlab.di.unimi.it/mc/twittok/";
-    private static final String TAG = "NETWORK_CLASS";
-    private static ApiInterface apiInterface = null;
-    private static SidRepository sid;
+    private final String BASE_URL = "https://develop.ewlab.di.unimi.it/mc/twittok/";
+    private final String TAG = "NETWORK_CLASS";
+    private ApiInterface apiInterface = null;
+    private OnDataReadyListener onDataReadyListener;
 
-    public static ApiInterface getApiInterface() {
+    public void setOnDataReadyListenert(OnDataReadyListener onDataReadyListener) {
+        this.onDataReadyListener = onDataReadyListener;
+    }
+
+    public ApiInterface getApiInterface() {
         if (apiInterface == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -37,13 +42,13 @@ public class NetworkDataSource {
     // ! -> I'd have to modify each file with each call implementation
     // pro: I'd have a class for each object I recive
     //
-    public static void callRegister() {
+    public void callRegister() {
         Call<SidRepository> registerCall = getApiInterface().register();
         registerCall.enqueue(new Callback<SidRepository>() {
             @Override
             public void onResponse(@NonNull Call<SidRepository> call, @NonNull Response<SidRepository> response) {
-                sid = response.body();
-                Log.d(TAG, "onCreate: SID VALUE: " + response.body().getSid());
+                onDataReadyListener.onDataReady(response.body());
+                Log.d(TAG, "onResponse: SID VALUE: " + response.body().getSid());
 
             }
 
@@ -57,7 +62,7 @@ public class NetworkDataSource {
     }
 
     //sid -> new RequestBody
-    public static void callGetProfile(RequestBody body) {
+    public void callGetProfile(RequestBody body) {
         Call<UserRepository> getProfile = getApiInterface().getProfile(body);
         getProfile.enqueue(new Callback<UserRepository>() {
             @Override
@@ -74,7 +79,7 @@ public class NetworkDataSource {
     }
 
     //sid, name, picture
-    public static void callSetProfile(RequestBody body) {
+    public void callSetProfile(RequestBody body) {
         Call<Object> setProfileCall = getApiInterface().setProfile(body);
         setProfileCall.enqueue(new Callback<Object>() {
             @Override
@@ -94,7 +99,7 @@ public class NetworkDataSource {
     }
 
     //sid, uid, tid
-    public static void callGetTwok(RequestBody body) {
+    public void callGetTwok(RequestBody body) {
         Call<TwokRepository> getTwokCall = getApiInterface().getTwok(body);
         getTwokCall.enqueue(new Callback<TwokRepository>() {
             @Override
@@ -111,7 +116,7 @@ public class NetworkDataSource {
     }
 
     //sid, twok specifics
-    public static void callAddTwok(RequestBody body) {
+    public void callAddTwok(RequestBody body) {
         Call<Object> addTwokCall = getApiInterface().addTwok(body);
         addTwokCall.enqueue(new Callback<Object>() {
             @Override
@@ -128,7 +133,7 @@ public class NetworkDataSource {
     }
 
     //sid, uid
-    public static void callGetPicture(RequestBody body) {
+    public void callGetPicture(RequestBody body) {
         Call<UserRepository> getPictureCall = getApiInterface().getPicture(body);
         getPictureCall.enqueue(new Callback<UserRepository>() {
             @Override
@@ -145,12 +150,13 @@ public class NetworkDataSource {
     }
 
     //sid, uid
-    public static void callFollow(RequestBody body) {
+    public void callFollow(RequestBody body) {
         Call<Object> followCall = getApiInterface().follow(body);
         followCall.enqueue(new Callback<Object>()   {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
-                Log.d(TAG, "onResponse: " + response.code());
+                onDataReadyListener.onDataReady(response.body());
+                Log.d(TAG, "callFolllow: onResponse: " + response.code() + " - " + response.message());
             }
 
             @Override
@@ -161,7 +167,7 @@ public class NetworkDataSource {
 
     }
 
-    public static void callUnfollow(RequestBody body) {
+    public void callUnfollow(RequestBody body) {
         Call<Object> unfollowCall = getApiInterface().unfollow(body);
         unfollowCall.enqueue(new Callback<Object>() {
             @Override
@@ -178,7 +184,7 @@ public class NetworkDataSource {
     }
 
     //sid
-    public static void callGetFollowed(RequestBody body) {
+    public void callGetFollowed(RequestBody body) {
         Call<UserRepository[]> getFollowedCall = getApiInterface().getFollowed(body);
         getFollowedCall.enqueue(new Callback<UserRepository[]>() {
             @Override
@@ -195,7 +201,7 @@ public class NetworkDataSource {
     }
 
     //sid, uid
-    public static void callIsFollowed(RequestBody body) {
+    public void callIsFollowed(RequestBody body) {
         Call<IsFollowed> isFollowedCall = getApiInterface().isFollowed(body);
         isFollowedCall.enqueue(new Callback<IsFollowed>() {
             @Override
