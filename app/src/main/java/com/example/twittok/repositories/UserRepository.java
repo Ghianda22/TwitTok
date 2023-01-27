@@ -1,5 +1,10 @@
 package com.example.twittok.repositories;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
+
 public class UserRepository {
     private Integer uid;
     private String sid;
@@ -59,5 +64,15 @@ public class UserRepository {
                 ", \n    picture='" + picture + '\'' +
                 ", \n    pversion=" + pversion +
                 "\n}";
+    }
+
+    public boolean checkPicture() {
+        //todo implement check
+        return true;
+    }
+    public Bitmap baseToBitmap(){
+        byte[] decodedBase64 = Base64.decode(picture, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedBase64, 0, decodedBase64.length);
+        return decodedByte;
     }
 }

@@ -2,12 +2,15 @@ package com.example.twittok.ui.profile;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +42,12 @@ public class ProfileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        mViewModel.getUserProfile().observe(getViewLifecycleOwner(), userProfile -> binding.userName.setText(userProfile.getName()));
+        mViewModel.getUserProfile().observe(getViewLifecycleOwner(), userProfile -> {
+            binding.userName.setText(userProfile.getName());
+            if(userProfile.getPicture() != null && userProfile.checkPicture()){
+                binding.userImage.setImageBitmap(userProfile.baseToBitmap());
+            }
+        });
     }
 
 }
