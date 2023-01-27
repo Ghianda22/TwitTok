@@ -4,4 +4,6 @@
     <string name="nav_menu_item_newtwok">New Twok</string>
     <string name="nav_menu_item_home">Home</string>
     <string name="nav_menu_item_profile">My Profile</string>
+    <string name="tv_placeholder_profile_name">Your username</string>
+    <string name="tv_placeholder_profile_image">Your profile image</string>
 </resources>

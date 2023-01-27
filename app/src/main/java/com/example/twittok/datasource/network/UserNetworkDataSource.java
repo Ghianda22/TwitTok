@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
+import com.example.twittok.listeners.OnUserReadyListener;
 import com.example.twittok.repositories.UserRepository;
 
 import retrofit2.Call;
@@ -14,16 +15,21 @@ import retrofit2.Response;
 public class UserNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "USER_network";
-    //todo add listener
+    private OnUserReadyListener onUserReadyListener;
+
+    public void setOnUserReadyListener(OnUserReadyListener onUserReadyListener) {
+        this.onUserReadyListener = onUserReadyListener;
+    }
 
     //sid -> new RequestBody
-    public static void callGetProfile(RequestBody body) {
+    public void callGetProfile(RequestBody body) {
         Call<UserRepository> getProfile = apiInterface.getProfile(body);
         getProfile.enqueue(new Callback<UserRepository>() {
             @Override
             public void onResponse(Call<UserRepository> call, Response<UserRepository> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
+                onUserReadyListener.onUserReady(response.body());
             }
 
             @Override

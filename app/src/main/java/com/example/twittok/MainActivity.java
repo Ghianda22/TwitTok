@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.twittok.databinding.ActivityMainBinding;
+import com.example.twittok.datasource.SidLocalDataSource;
 import com.example.twittok.datasource.network.SidNetworkDataSource;
 import com.example.twittok.datasource.network.UserNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
@@ -33,19 +34,22 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfig);
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
 
-
+//        TODO: move this lines and a listener in home fragment
+        if(new SidLocalDataSource().getSid() == null){
+            new SidNetworkDataSource().callRegister();
+        }
         //RETROFIT TESTING
 //        RequestBody body = new RequestBody(513802);
 //        ConfigNetworkDataSource.callGetProfile(new RequestBody());
 //        ConfigNetworkDataSource.callSetProfile(body);
 //        ConfigNetworkDataSource.callFollow(body);
 //        ConfigNetworkDataSource.callGetTwok(body);
-        SidNetworkDataSource sidNetworkDataSource = new SidNetworkDataSource();
-        sidNetworkDataSource.callRegister();
-        sidNetworkDataSource.setOnResponseReadyListener(sid -> {
-            RequestBody requestBody = new RequestBody();
-            UserNetworkDataSource.callGetProfile(requestBody);
-        });
+//        SidNetworkDataSource sidNetworkDataSource = new SidNetworkDataSource();
+//        sidNetworkDataSource.callRegister();
+//        sidNetworkDataSource.setOnResponseReadyListener(sid -> {
+//            RequestBody requestBody = new RequestBody();
+//            UserNetworkDataSource.callGetProfile(requestBody);
+//        });
 
         //SHARED PREF TESTING
 //        ConfigNetworkDataSource.callRegister(this);

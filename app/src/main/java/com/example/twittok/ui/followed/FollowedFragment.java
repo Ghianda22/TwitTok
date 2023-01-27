@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class FollowedFragment extends Fragment {
 
     private FollowedViewModel mViewModel;
     private FragmentFollowedBinding binding;
+    private static final String TAG = "FOLLOWED_FRAGMENT";
 
     public static FollowedFragment newInstance() {
         return new FollowedFragment();
@@ -32,7 +34,7 @@ public class FollowedFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentFollowedBinding.inflate(inflater, container, false);
-
+        Log.d(TAG, "onCreateView: ");
 
         return binding.getRoot();
     }
@@ -42,6 +44,7 @@ public class FollowedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //NAVIGATION - experiment to test values passing in an action
         //TODO - pass the uid of the selected user
+        Log.d(TAG, "onViewCreated: ");
         Integer uid = 23151;
         binding.button.setOnClickListener(clickedView -> {
             NavDirections action = FollowedFragmentDirections.actionNavDirectionFollowedToUserBoardFragment(uid);

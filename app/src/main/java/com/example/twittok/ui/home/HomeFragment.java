@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel mViewModel;
     private FragmentHomeBinding binding;
+    private static final String TAG = "HOME_FRAGMENT";
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -29,7 +31,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
+        Log.d(TAG, "onCreateView: ");
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -39,6 +41,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //NAVIGATION - experiment to test values passing in an action
         //TODO - pass the uid of the selected user
+        Log.d(TAG, "onViewCreated: ");
         Integer uid = 23151;
         binding.button.setOnClickListener(clickedView -> {
             NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToUserBoardFragment(uid);
