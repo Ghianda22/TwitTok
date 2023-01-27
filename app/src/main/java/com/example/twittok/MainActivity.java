@@ -1,6 +1,5 @@
 package com.example.twittok;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,14 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.twittok.databinding.ActivityMainBinding;
-import com.example.twittok.datasource.NetworkDataSource;
-import com.example.twittok.datasource.RequestBody;
-import com.example.twittok.datasource.SidLocalDataSource;
+import com.example.twittok.datasource.network.SidNetworkDataSource;
+import com.example.twittok.datasource.network.UserNetworkDataSource;
+import com.example.twittok.datasource.network.config.RequestBody;
 import com.example.twittok.repositories.SidRepository;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,15 +36,23 @@ public class MainActivity extends AppCompatActivity {
 
         //RETROFIT TESTING
 //        RequestBody body = new RequestBody(513802);
-//        NetworkDataSource.callGetProfile(new RequestBody());
-//        NetworkDataSource.callSetProfile(body);
-//        NetworkDataSource.callFollow(body);
-//        NetworkDataSource.callGetTwok(body);
+//        ConfigNetworkDataSource.callGetProfile(new RequestBody());
+//        ConfigNetworkDataSource.callSetProfile(body);
+//        ConfigNetworkDataSource.callFollow(body);
+//        ConfigNetworkDataSource.callGetTwok(body);
+        SidNetworkDataSource sidNetworkDataSource = new SidNetworkDataSource();
+        sidNetworkDataSource.callRegister();
+        sidNetworkDataSource.setOnResponseReadyListener(sid -> {
+            RequestBody requestBody = new RequestBody();
+            UserNetworkDataSource.callGetProfile(requestBody);
+        });
 
         //SHARED PREF TESTING
-//        NetworkDataSource.callRegister(this);
+//        ConfigNetworkDataSource.callRegister(this);
 //        SidLocalDataSource sidLocalDataSource = new SidLocalDataSource(this);
 //        Log.d(TAG, "onCreate: " + sidLocalDataSource.getSid());
+
+        Log.d(TAG, "onCreate: " + new SidRepository().getSid());
     }
 
     @Override //implements backstack
@@ -58,4 +61,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfig)
                 || super.onSupportNavigateUp();
     }
+
 }

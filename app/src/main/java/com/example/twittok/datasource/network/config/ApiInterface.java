@@ -1,4 +1,4 @@
-package com.example.twittok.datasource;
+package com.example.twittok.datasource.network.config;
 
 import com.example.twittok.repositories.IsFollowed;
 import com.example.twittok.repositories.SidRepository;
@@ -7,11 +7,7 @@ import com.example.twittok.repositories.UserRepository;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 
 public interface ApiInterface {
     @POST("register")
