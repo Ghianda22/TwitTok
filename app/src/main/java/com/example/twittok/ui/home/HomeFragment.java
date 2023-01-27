@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.example.twittok.R;
 import com.example.twittok.databinding.FragmentHomeBinding;
+import com.example.twittok.datasource.network.config.ContextSupplier;
 
 public class HomeFragment extends Fragment {
 
@@ -45,11 +48,19 @@ public class HomeFragment extends Fragment {
             Navigation.findNavController(clickedView).navigate(action);
         });
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        // TODO: Use the ViewModel
+
+        RecyclerView recyclerView = binding.twokRecyclerView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mViewModel.getProvaList().observe(getViewLifecycleOwner(), provaList -> {
+            TwokViewAdapter adapter = new TwokViewAdapter(provaList);
+            recyclerView.setAdapter(adapter);
+        });
     }
 
 }
