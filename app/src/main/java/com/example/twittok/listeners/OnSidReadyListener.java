@@ -3,5 +3,5 @@ package com.example.twittok.listeners;
 import com.example.twittok.datasource.model.SidModel;
 
 public interface OnSidReadyListener {
-    void onSidReady(SidModel sid);
+    void onSidReady(SidModel sidResponse);
 }

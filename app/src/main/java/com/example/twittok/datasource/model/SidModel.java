@@ -9,14 +9,7 @@ public class SidModel {
 
     public SidModel() {}
 
-    public String getSid() {    //todo Make it retrieve it from SharedPreferences or call the api
-        if(sid == null){
-            SidLocalDataSource sidLocalDataSource = new SidLocalDataSource();
-            if (sidLocalDataSource.getSid() != null) {
-                setSid(sidLocalDataSource.getSid());
-                return sid;
-            }
-        }
+    public String getSid() {
         return sid;
     }
 
