@@ -3,14 +3,14 @@ package com.example.twittok.repositories;
 import com.example.twittok.datasource.SidLocalDataSource;
 import com.example.twittok.datasource.model.SidModel;
 import com.example.twittok.datasource.network.SidNetworkDataSource;
-import com.example.twittok.listeners.OnSidReadyListener;
+import com.example.twittok.listeners.OnSidLoadedListener;
 
 public class SidRepository {
 
     private SidModel sid = null;
-    private OnSidReadyListener onSidReadyListener;
-    public void setOnSidReadyListener(OnSidReadyListener onSidReadyListener) {
-        this.onSidReadyListener = onSidReadyListener;
+    private OnSidLoadedListener onSidLoadedListener;
+    public void setOnSidReadyListener(OnSidLoadedListener onSidLoadedListener) {
+        this.onSidLoadedListener = onSidLoadedListener;
     }
 
     public void setSid(){
@@ -19,9 +19,9 @@ public class SidRepository {
                 sid.setSid(SidLocalDataSource.getSid());
             }else{
                 SidNetworkDataSource sidNetworkDataSource = new SidNetworkDataSource();
-                sidNetworkDataSource.setOnResponseReadyListener(sidResponse -> {
+                sidNetworkDataSource.setOnSidLoadedListener(sidResponse -> {
                     sid = sidResponse;
-                    onSidReadyListener.onSidReady(sid);
+                    onSidLoadedListener.onSidLoaded(sid);
                 });
                 sidNetworkDataSource.callRegister();
             }

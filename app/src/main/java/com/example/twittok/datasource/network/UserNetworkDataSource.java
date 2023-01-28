@@ -6,6 +6,7 @@ import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
 import com.example.twittok.datasource.model.UserModel;
+import com.example.twittok.listeners.OnProfileLoadedListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,7 +15,7 @@ import retrofit2.Response;
 public class UserNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "USER_network";
-    //todo add listener
+    private OnProfileLoadedListener onProfileLoadedListener;
 
     //sid -> new RequestBody
     public static void callGetProfile(RequestBody body) {
