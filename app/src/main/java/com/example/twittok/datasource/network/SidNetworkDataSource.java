@@ -17,13 +17,8 @@ import retrofit2.Response;
 public class SidNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "SID_network";
-    private OnSidLoadedListener onSidLoadedListener;
 
-    public void setOnSidLoadedListener(OnSidLoadedListener onSidLoadedListener) {
-        this.onSidLoadedListener = onSidLoadedListener;
-    }
-
-    public void callRegister() {
+    public static void callRegister(OnSidLoadedListener onSidLoadedListener) {
         Call<SidModel> registerCall = apiInterface.register();
         registerCall.enqueue(new Callback<SidModel>() {
             @Override

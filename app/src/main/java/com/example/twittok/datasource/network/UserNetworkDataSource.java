@@ -15,16 +15,16 @@ import retrofit2.Response;
 public class UserNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "USER_network";
-    private OnProfileLoadedListener onProfileLoadedListener;
 
     //sid -> new RequestBody
-    public static void callGetProfile(RequestBody body) {
+    public static void callGetProfile(RequestBody body, OnProfileLoadedListener onProfileLoadedListener) {
         Call<UserModel> getProfile = apiInterface.getProfile(body);
         getProfile.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
+                onProfileLoadedListener.onProfileLoaded(response.body());
             }
 
             @Override
@@ -53,13 +53,14 @@ public class UserNetworkDataSource {
     }
 
     //sid, uid
-    public static void callGetPicture(RequestBody body) {
+    public static void callGetPicture(RequestBody body, OnProfileLoadedListener onProfileLoadedListener) {
         Call<UserModel> getPictureCall = apiInterface.getPicture(body);
         getPictureCall.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
+                onProfileLoadedListener.onProfileLoaded(response.body());
             }
 
             @Override

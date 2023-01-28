@@ -7,6 +7,8 @@ import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
 import com.example.twittok.datasource.model.IsFollowed;
 import com.example.twittok.datasource.model.UserModel;
+import com.example.twittok.listeners.OnFollowedListLoadedListener;
+import com.example.twittok.listeners.OnIsFollowedLoadedListener;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,6 @@ import retrofit2.Response;
 public class FollowNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "FOLLOW_network";
-    //todo add listener
 
     //sid, uid
     public static void callFollow(RequestBody body) {
@@ -55,15 +56,17 @@ public class FollowNetworkDataSource {
     }
 
     //sid
-    public static void callGetFollowed(RequestBody body) {
+    public static void callGetFollowed(RequestBody body, OnFollowedListLoadedListener followedListLoadedListener) {
         Call<ArrayList<UserModel>> getFollowedCall = apiInterface.getFollowed(body);
         getFollowedCall.enqueue(new Callback<ArrayList<UserModel>>() {
             @Override
             public void onResponse(Call<ArrayList<UserModel>> call, Response<ArrayList<UserModel>> response) {
+                if(response.isSuccessful()){
+                    Log.d(TAG, "onResponse: followed users are " + response.body().size());
+                    followedListLoadedListener.onFollowedListLoaded(response.body());
+                }
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
-                Log.d(TAG, "onResponse: " + response.body().size());
             }
-
             @Override
             public void onFailure(Call<ArrayList<UserModel>> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
@@ -73,13 +76,16 @@ public class FollowNetworkDataSource {
     }
 
     //sid, uid
-    public static void callIsFollowed(RequestBody body) {
+    public static void callIsFollowed(RequestBody body, OnIsFollowedLoadedListener onIsFollowedLoadedListener) {
         Call<IsFollowed> isFollowedCall = apiInterface.isFollowed(body);
         isFollowedCall.enqueue(new Callback<IsFollowed>() {
             @Override
             public void onResponse(Call<IsFollowed> call, Response<IsFollowed> response) {
+                if(response.isSuccessful()){
+                    Log.d(TAG, "onResponse: " + response.body());
+                    onIsFollowedLoadedListener.isFollowedLoaded(response.body());
+                }
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
-                Log.d(TAG, "onResponse: " + response.body());
             }
 
             @Override

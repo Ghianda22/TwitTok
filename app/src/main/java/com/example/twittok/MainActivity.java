@@ -51,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
         //REPOSITORY TEST
         SidRepository sidRepository = new SidRepository();
         if(sidRepository.getSid() == null) {
-            sidRepository.setSid();
-            sidRepository.setOnSidReadyListener(sidResponse -> Log.d(TAG, "onCreate: " + sidResponse.getSid()));
+            sidRepository.setSid(sidResponse -> {
+                Log.d(TAG, "onCreate: " + sidResponse.getSid());
+                //here do other stuff & calls
+            });
         }
 
         //SHARED PREF TESTING
