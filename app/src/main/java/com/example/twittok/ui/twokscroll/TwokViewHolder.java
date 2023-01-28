@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
-import com.example.twittok.repositories.TwokRepository;
+import com.example.twittok.datasource.model.TwokModel;
 
 public class TwokViewHolder extends RecyclerView.ViewHolder {
 
@@ -29,7 +29,7 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         followButton = itemView.findViewById(R.id.followButton);
     }
 
-    public void updateContent(TwokRepository twokToShow) {
+    public void updateContent(TwokModel twokToShow) {
         //extract all twok properties
         //assign to views the twok properties
         twokContent.setText(twokToShow.getText());

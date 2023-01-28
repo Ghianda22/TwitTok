@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
 import com.example.twittok.datasource.network.config.ContextSupplier;
-import com.example.twittok.repositories.TwokRepository;
+import com.example.twittok.datasource.model.TwokModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class TwokViewAdapter extends RecyclerView.Adapter<TwokViewHolder> {
 
     private LayoutInflater inflater = LayoutInflater.from(ContextSupplier.getContext());
-    private List<TwokRepository> twokList;
+    private ArrayList<TwokModel> twokArrayList;
 
-    public TwokViewAdapter(List<TwokRepository> twokList) {
-        this.twokList = twokList;
+    public TwokViewAdapter(ArrayList<TwokModel> twokArrayList) {
+        this.twokArrayList = twokArrayList;
     }
 
     @NonNull
@@ -32,12 +32,12 @@ public class TwokViewAdapter extends RecyclerView.Adapter<TwokViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TwokViewHolder holder, int position) {
-        TwokRepository twokToShow = twokList.get(position);
+        TwokModel twokToShow = twokArrayList.get(position);
         holder.updateContent(twokToShow);
     }
 
     @Override
     public int getItemCount() {
-        return twokList.size();
+        return twokArrayList.size();
     }
 }
