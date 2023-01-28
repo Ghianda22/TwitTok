@@ -5,6 +5,8 @@ import com.example.twittok.datasource.model.SidModel;
 import com.example.twittok.datasource.model.TwokModel;
 import com.example.twittok.datasource.model.UserModel;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -35,7 +37,7 @@ public interface ApiInterface {
     @POST("unfollow")
     Call<Object> unfollow(@Body RequestBody body);
     @POST("getFollowed")
-    Call<UserModel[]> getFollowed(@Body RequestBody body);
+    Call<ArrayList<UserModel>> getFollowed(@Body RequestBody body);
     @POST("isFollowed")
     Call<IsFollowed> isFollowed(@Body RequestBody body);
 }
