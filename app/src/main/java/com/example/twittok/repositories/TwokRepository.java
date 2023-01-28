@@ -70,4 +70,108 @@ public class TwokRepository {
                 ", \n    lon=" + lon +
                 "\n}";
     }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getPversion() {
+        return pversion;
+    }
+
+    public void setPversion(Integer pversion) {
+        this.pversion = pversion;
+    }
+
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getBgcol() {
+        return bgcol;
+    }
+
+    public void setBgcol(String bgcol) {
+        this.bgcol = bgcol;
+    }
+
+    public String getFontcol() {
+        return fontcol;
+    }
+
+    public void setFontcol(String fontcol) {
+        this.fontcol = fontcol;
+    }
+
+    public Integer getFontsize() {
+        return fontsize;
+    }
+
+    public void setFontsize(Integer fontsize) {
+        this.fontsize = fontsize;
+    }
+
+    public Integer getFonttype() {
+        return fonttype;
+    }
+
+    public void setFonttype(Integer fonttype) {
+        this.fonttype = fonttype;
+    }
+
+    public Integer getHalign() {
+        return halign;
+    }
+
+    public void setHalign(Integer halign) {
+        this.halign = halign;
+    }
+
+    public Integer getValign() {
+        return valign;
+    }
+
+    public void setValign(Integer valign) {
+        this.valign = valign;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLon() {
+        return lon;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
 }
