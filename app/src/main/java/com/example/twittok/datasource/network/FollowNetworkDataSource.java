@@ -8,6 +8,8 @@ import com.example.twittok.datasource.network.config.RequestBody;
 import com.example.twittok.datasource.model.IsFollowed;
 import com.example.twittok.datasource.model.UserModel;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,16 +56,16 @@ public class FollowNetworkDataSource {
 
     //sid
     public static void callGetFollowed(RequestBody body) {
-        Call<UserModel[]> getFollowedCall = apiInterface.getFollowed(body);
-        getFollowedCall.enqueue(new Callback<UserModel[]>() {
+        Call<ArrayList<UserModel>> getFollowedCall = apiInterface.getFollowed(body);
+        getFollowedCall.enqueue(new Callback<ArrayList<UserModel>>() {
             @Override
-            public void onResponse(Call<UserModel[]> call, Response<UserModel[]> response) {
+            public void onResponse(Call<ArrayList<UserModel>> call, Response<ArrayList<UserModel>> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
-                Log.d(TAG, "onResponse: " + response.body().length);
+                Log.d(TAG, "onResponse: " + response.body().size());
             }
 
             @Override
-            public void onFailure(Call<UserModel[]> call, Throwable t) {
+            public void onFailure(Call<ArrayList<UserModel>> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
