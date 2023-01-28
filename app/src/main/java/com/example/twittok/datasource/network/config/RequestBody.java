@@ -1,10 +1,9 @@
 package com.example.twittok.datasource.network.config;
 
-import com.example.twittok.repositories.SidRepository;
-import com.example.twittok.repositories.TwokRepository;
+import com.example.twittok.datasource.model.SidModel;
 
 public class RequestBody{
-    private String sid = new SidRepository().getSid();
+    private String sid = new SidModel().getSid();
     private Integer uid = null;
     private String name = null;
     private String picture = null;

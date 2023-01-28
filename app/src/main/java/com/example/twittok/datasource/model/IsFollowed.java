@@ -1,4 +1,4 @@
-package com.example.twittok.repositories;
+package com.example.twittok.datasource.model;
 
 public class IsFollowed {
     private Boolean followed;

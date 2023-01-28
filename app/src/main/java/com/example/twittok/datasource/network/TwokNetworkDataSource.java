@@ -5,7 +5,7 @@ import android.util.Log;
 import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
-import com.example.twittok.repositories.TwokRepository;
+import com.example.twittok.datasource.model.TwokModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,16 +19,16 @@ public class TwokNetworkDataSource {
 
     //sid, uid, tid
     public static void callGetTwok(RequestBody body) {
-        Call<TwokRepository> getTwokCall = apiInterface.getTwok(body);
-        getTwokCall.enqueue(new Callback<TwokRepository>() {
+        Call<TwokModel> getTwokCall = apiInterface.getTwok(body);
+        getTwokCall.enqueue(new Callback<TwokModel>() {
             @Override
-            public void onResponse(Call<TwokRepository> call, Response<TwokRepository> response) {
+            public void onResponse(Call<TwokModel> call, Response<TwokModel> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
             }
 
             @Override
-            public void onFailure(Call<TwokRepository> call, Throwable t) {
+            public void onFailure(Call<TwokModel> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });

@@ -1,39 +1,34 @@
 package com.example.twittok.repositories;
 
-import android.content.SharedPreferences;
-import android.util.Log;
-
 import com.example.twittok.datasource.SidLocalDataSource;
+import com.example.twittok.datasource.model.SidModel;
 import com.example.twittok.datasource.network.SidNetworkDataSource;
+import com.example.twittok.listeners.OnSidReadyListener;
 
 public class SidRepository {
-    //can't be static due to Gson converter
-    //another static field (eg. persistentSid) is incompatible with RequestBody, which require non-static fields
-    private String sid;
 
-    public SidRepository() {}
+    private SidModel sid = null;
+    private OnSidReadyListener onSidReadyListener;
+    public void setOnSidReadyListener(OnSidReadyListener onSidReadyListener) {
+        this.onSidReadyListener = onSidReadyListener;
+    }
 
-    public String getSid() {    //todo Make it retrieve it from SharedPreferences or call the api
+    public void setSid(){
         if(sid == null){
-            SidLocalDataSource sidLocalDataSource = new SidLocalDataSource();
-            if (sidLocalDataSource.getSid() != null) {
-                setSid(sidLocalDataSource.getSid());
-                return sid;
+            if (SidLocalDataSource.getSid() != null) {
+                sid.setSid(SidLocalDataSource.getSid());
+            }else{
+                SidNetworkDataSource sidNetworkDataSource = new SidNetworkDataSource();
+                sidNetworkDataSource.setOnResponseReadyListener(sidResponse -> {
+                    sid = sidResponse;
+                    onSidReadyListener.onSidReady(sid);
+                });
+                sidNetworkDataSource.callRegister();
             }
         }
+    }
+
+    public SidModel getSid() {
         return sid;
-    }
-
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "\nSidRepository {\n" +
-                "    sid = '" + sid + '\'' +
-                "\n}";
     }
 }
