@@ -1,6 +1,6 @@
-package com.example.twittok.repositories;
+package com.example.twittok.datasource.model;
 
-public class TwokRepository {
+public class TwokModel {
     private Integer uid;
     private String name;
     private Integer pversion;
@@ -16,12 +16,12 @@ public class TwokRepository {
     private Double lat = null;
     private Double lon = null;
 
-    public TwokRepository() {
+    public TwokModel() {
     }
 
 
     //without position
-    public TwokRepository(Integer uid, String name, Integer pversion, Integer tid, String text, String bgcol, String fontcol, Integer fontsize, Integer fonttype, Integer halign, Integer valign) {
+    public TwokModel(Integer uid, String name, Integer pversion, Integer tid, String text, String bgcol, String fontcol, Integer fontsize, Integer fonttype, Integer halign, Integer valign) {
         this.uid = uid;
         this.name = name;
         this.pversion = pversion;
@@ -36,7 +36,7 @@ public class TwokRepository {
     }
 
     //with position
-    public TwokRepository(Integer uid, String name, Integer pversion, Integer tid, String text, String bgcol, String fontcol, Integer fontsize, Integer fonttype, Integer halign, Integer valign, Double lat, Double lon) {
+    public TwokModel(Integer uid, String name, Integer pversion, Integer tid, String text, String bgcol, String fontcol, Integer fontsize, Integer fonttype, Integer halign, Integer valign, Double lat, Double lon) {
         this.uid = uid;
         this.name = name;
         this.pversion = pversion;
@@ -54,7 +54,7 @@ public class TwokRepository {
 
     @Override
     public String toString() {
-        return "\nTwokRepository{" +
+        return "\nTwokModel{" +
                 "\n    uid=" + uid +
                 ", \n    name='" + name + '\'' +
                 ", \n    pversion=" + pversion +

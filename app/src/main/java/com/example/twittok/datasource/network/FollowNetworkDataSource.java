@@ -5,8 +5,8 @@ import android.util.Log;
 import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
-import com.example.twittok.repositories.IsFollowed;
-import com.example.twittok.repositories.UserRepository;
+import com.example.twittok.datasource.model.IsFollowed;
+import com.example.twittok.datasource.model.UserModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,16 +54,16 @@ public class FollowNetworkDataSource {
 
     //sid
     public static void callGetFollowed(RequestBody body) {
-        Call<UserRepository[]> getFollowedCall = apiInterface.getFollowed(body);
-        getFollowedCall.enqueue(new Callback<UserRepository[]>() {
+        Call<UserModel[]> getFollowedCall = apiInterface.getFollowed(body);
+        getFollowedCall.enqueue(new Callback<UserModel[]>() {
             @Override
-            public void onResponse(Call<UserRepository[]> call, Response<UserRepository[]> response) {
+            public void onResponse(Call<UserModel[]> call, Response<UserModel[]> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body().length);
             }
 
             @Override
-            public void onFailure(Call<UserRepository[]> call, Throwable t) {
+            public void onFailure(Call<UserModel[]> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });

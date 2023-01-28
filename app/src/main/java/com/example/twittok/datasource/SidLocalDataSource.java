@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.twittok.datasource.network.config.ContextSupplier;
-import com.example.twittok.repositories.SidRepository;
+import com.example.twittok.datasource.model.SidModel;
 
 //key-value local data source
 public class SidLocalDataSource {
@@ -19,7 +19,7 @@ public class SidLocalDataSource {
         sharedPreferences= context.getSharedPreferences(SID_FILENAME, Context.MODE_PRIVATE);
     }
 
-    public void saveSid(SidRepository sid){
+    public void saveSid(SidModel sid){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(SID_KEY, sid.getSid());
         editor.apply();

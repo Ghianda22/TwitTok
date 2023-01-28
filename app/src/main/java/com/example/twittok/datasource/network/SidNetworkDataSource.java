@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import com.example.twittok.datasource.SidLocalDataSource;
 import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
-import com.example.twittok.listeners.OnResponseReadyListener;
-import com.example.twittok.repositories.SidRepository;
+import com.example.twittok.listeners.OnSidReadyListener;
+import com.example.twittok.datasource.model.SidModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,24 +17,24 @@ import retrofit2.Response;
 public class SidNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "SID_network";
-    private OnResponseReadyListener onResponseReadyListener;
+    private OnSidReadyListener onSidReadyListener;
 
-    public void setOnResponseReadyListener(OnResponseReadyListener onResponseReadyListener) {
-        this.onResponseReadyListener = onResponseReadyListener;
+    public void setOnResponseReadyListener(OnSidReadyListener onSidReadyListener) {
+        this.onSidReadyListener = onSidReadyListener;
     }
 
     public void callRegister() {
-        Call<SidRepository> registerCall = apiInterface.register();
-        registerCall.enqueue(new Callback<SidRepository>() {
+        Call<SidModel> registerCall = apiInterface.register();
+        registerCall.enqueue(new Callback<SidModel>() {
             @Override
-            public void onResponse(@NonNull Call<SidRepository> call, @NonNull Response<SidRepository> response) {
+            public void onResponse(@NonNull Call<SidModel> call, @NonNull Response<SidModel> response) {
                 Log.d(TAG, "onCreate: SID VALUE: " + response.body().getSid());
                 new SidLocalDataSource().saveSid(response.body());
-                onResponseReadyListener.onSidReady(response.body());
+                onSidReadyListener.onSidReady(response.body());
             }
 
             @Override
-            public void onFailure(Call<SidRepository> call, Throwable t) {
+            public void onFailure(Call<SidModel> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });

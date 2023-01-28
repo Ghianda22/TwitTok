@@ -13,7 +13,7 @@ import com.example.twittok.databinding.ActivityMainBinding;
 import com.example.twittok.datasource.network.SidNetworkDataSource;
 import com.example.twittok.datasource.network.UserNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
-import com.example.twittok.repositories.SidRepository;
+import com.example.twittok.datasource.model.SidModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 //        SidLocalDataSource sidLocalDataSource = new SidLocalDataSource(this);
 //        Log.d(TAG, "onCreate: " + sidLocalDataSource.getSid());
 
-        Log.d(TAG, "onCreate: " + new SidRepository().getSid());
+        Log.d(TAG, "onCreate: " + new SidModel().getSid());
     }
 
     @Override //implements backstack
