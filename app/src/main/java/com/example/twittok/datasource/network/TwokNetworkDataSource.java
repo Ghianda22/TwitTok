@@ -15,13 +15,9 @@ import retrofit2.Response;
 public class TwokNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "TWOK_network";
-    private OnTwokLoadedListener onTwokLoadedListener;
-    public void setOnTwokLoadedListener(OnTwokLoadedListener onTwokLoadedListener) {
-        this.onTwokLoadedListener = onTwokLoadedListener;
-    }
 
     //sid, uid, tid
-    public void callGetTwok(RequestBody body) {
+    public static void callGetTwok(RequestBody body, OnTwokLoadedListener onTwokLoadedListener) {
         Call<TwokModel> getTwokCall = apiInterface.getTwok(body);
         getTwokCall.enqueue(new Callback<TwokModel>() {
             @Override
