@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.twittok.datasource.SidLocalDataSource;
 import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
-import com.example.twittok.listeners.OnSidReadyListener;
+import com.example.twittok.listeners.OnSidLoadedListener;
 import com.example.twittok.datasource.model.SidModel;
 
 import retrofit2.Call;
@@ -17,10 +17,10 @@ import retrofit2.Response;
 public class SidNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "SID_network";
-    private OnSidReadyListener onSidReadyListener;
+    private OnSidLoadedListener onSidLoadedListener;
 
-    public void setOnResponseReadyListener(OnSidReadyListener onSidReadyListener) {
-        this.onSidReadyListener = onSidReadyListener;
+    public void setOnSidLoadedListener(OnSidLoadedListener onSidLoadedListener) {
+        this.onSidLoadedListener = onSidLoadedListener;
     }
 
     public void callRegister() {
@@ -29,8 +29,8 @@ public class SidNetworkDataSource {
             @Override
             public void onResponse(@NonNull Call<SidModel> call, @NonNull Response<SidModel> response) {
                 Log.d(TAG, "onCreate: SID VALUE: " + response.body().getSid());
-                new SidLocalDataSource().saveSid(response.body());
-                onSidReadyListener.onSidReady(response.body());
+                SidLocalDataSource.saveSid(response.body());
+                onSidLoadedListener.onSidLoaded(response.body());
             }
 
             @Override
