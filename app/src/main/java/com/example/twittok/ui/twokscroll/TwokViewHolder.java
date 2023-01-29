@@ -32,13 +32,13 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         followButton = itemView.findViewById(R.id.followButton);
     }
 
-    public void updateContent(TwokRepository twokToShow) {
-        TwokModel twokContent = twokToShow.getTwok();
+    public void updateContent(TwokRepository twokData) {
+        TwokModel twokToShow = twokData.getTwok();
 //        Log.d(TAG, "updateContent: the author is followed?" + twokToShow.isFollowed());
         //extract all twok properties
         //assign to views the twok properties
-        twokContent.setText(twokContent.getText());
-        userName.setText(twokContent.getName());
+        twokContent.setText(twokToShow.getText());
+        userName.setText(twokToShow.getName());
 //        userPicture.setImageBitmap(); -> a fucking mess
         // check on room the version, if correspondant load it from room, if otherwise callGetPicture
         // followButton -> callIsFollowed if yes display Unfollow, if no Follow
