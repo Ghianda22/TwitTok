@@ -54,9 +54,8 @@ public class HomeFragment extends Fragment {
 
         firstTime = true;
         Log.d(TAG, "onViewCreated: viewmodel = " + homeViewModel);
-        Log.d(TAG, "onViewCreated: viewmodel = " + homeViewModel.arrayListToString());
-        Log.d(TAG, "onViewCreated: viewmodel is empty? " + homeViewModel.getTwokArrayList().getValue().isEmpty());
-        if (homeViewModel.getTwokArrayList().getValue().isEmpty()) {
+        Log.d(TAG, "onViewCreated: viewmodel is empty? " + homeViewModel.isEmpty());
+        if (homeViewModel.isEmpty()) {
             if(SidRepository.getSid() == null) {
                 Log.d(TAG, "onViewCreated: sid == null");
                 SidRepository.setSid(sidResponse -> {

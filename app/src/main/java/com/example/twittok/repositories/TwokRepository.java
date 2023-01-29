@@ -15,17 +15,16 @@ public class TwokRepository {
      *   if so -> convert it
      * */
 
-    private TwokModel twok;
     private static final String TAG = "TWOK_REPOSITORY";
-
-//    private boolean isFollowed;
+    private TwokModel twok;
+    private boolean isFollowed;
 
     public void loadTwok(OnTwokReadyListener onTwokReadyListener){
         TwokNetworkDataSource.callGetTwok(new RequestBody(), twokResponse -> {
             twok = twokResponse;
 //            checkIfFollowed(twok);
 //            checkImageSaved(twok.getUid());
-            onTwokReadyListener.onTwokReady(twokResponse);
+            onTwokReadyListener.onTwokReady(this);
         });
     }
 
@@ -55,4 +54,12 @@ public class TwokRepository {
 //    public void setFollowed(boolean followed) {
 //        isFollowed = followed;
 //    }
+
+    @Override
+    public String toString() {
+        return "TwokRepository{" +
+                "twok=" + twok +
+                ", isFollowed=" + isFollowed +
+                '}';
+    }
 }

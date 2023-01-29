@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
 import com.example.twittok.datasource.model.TwokModel;
+import com.example.twittok.repositories.TwokRepository;
 
 public class TwokViewHolder extends RecyclerView.ViewHolder {
 
@@ -29,11 +30,12 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         followButton = itemView.findViewById(R.id.followButton);
     }
 
-    public void updateContent(TwokModel twokToShow) {
+    public void updateContent(TwokRepository twokToShow) {
+        TwokModel twokContent = twokToShow.getTwok();
         //extract all twok properties
         //assign to views the twok properties
-        twokContent.setText(twokToShow.getText());
-        userName.setText(twokToShow.getName());
+        twokContent.setText(twokContent.getText());
+        userName.setText(twokContent.getName());
 //        userPicture.setImageBitmap(); -> a fucking mess
         // check on room the version, if correspondant load it from room, if otherwise callGetPicture
         // followButton -> callIsFollowed if yes display Unfollow, if no Follow

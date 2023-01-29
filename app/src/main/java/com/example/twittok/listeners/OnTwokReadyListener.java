@@ -4,5 +4,5 @@ import com.example.twittok.datasource.model.TwokModel;
 import com.example.twittok.repositories.TwokRepository;
 
 public interface OnTwokReadyListener {
-    void onTwokReady(TwokModel twokModel);
+    void onTwokReady(TwokRepository twokRepository);
 }
