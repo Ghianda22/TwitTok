@@ -32,8 +32,8 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         followButton = itemView.findViewById(R.id.followButton);
     }
 
-    public void updateContent(TwokRepository twokData) {
-        TwokModel twokToShow = twokData.getTwok();
+    public void updateContent(TwokRepository twokRepository) {
+        TwokModel twokToShow = twokRepository.getTwok();
 //        Log.d(TAG, "updateContent: the author is followed?" + twokToShow.isFollowed());
         //extract all twok properties
         //assign to views the twok properties

@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private boolean firstTime;
     private static final String TAG = "HOME_FRAGMENT";
-    private final int bufferSize = 5;
+    private final int bufferSize = 2;
 
 
     public static HomeFragment newInstance() {
@@ -94,8 +94,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                if(viewPager.getCurrentItem() > homeViewModel.getSize() - bufferSize)
+                if(viewPager.getCurrentItem() > homeViewModel.getSize() - bufferSize) {
                     homeViewModel.addTwok();
+                    Log.d(TAG, "onPageSelected: ero vicino alla fine");
+                }
             }
         });
         //NAVIGATION - experiment to test values passing in an action

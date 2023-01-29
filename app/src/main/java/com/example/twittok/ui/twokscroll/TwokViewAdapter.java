@@ -1,6 +1,5 @@
 package com.example.twittok.ui.twokscroll;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
-import com.example.twittok.datasource.network.config.ContextSupplier;
+import com.example.twittok.datasource.ContextSupplier;
 import com.example.twittok.repositories.TwokRepository;
 
 import java.util.ArrayList;
