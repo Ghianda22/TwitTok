@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         //REPOSITORY TEST
-        SidRepository sidRepository = new SidRepository();
-        if(sidRepository.getSid() == null) {
-            sidRepository.setSid(sidResponse -> {
-                Log.d(TAG, "onCreate: " + sidResponse.getSid());
-                //here do other stuff & calls
-            });
-        }
+//        SidRepository sidRepository = new SidRepository();
+//        if(sidRepository.getSid() == null) {
+//            sidRepository.setSid(sidResponse -> {
+//                Log.d(TAG, "onCreate: " + sidResponse.getSid());
+//                //here do other stuff & calls
+//            });
+//        }
 
         //SHARED PREF TESTING
 //        ConfigNetworkDataSource.callRegister(this);

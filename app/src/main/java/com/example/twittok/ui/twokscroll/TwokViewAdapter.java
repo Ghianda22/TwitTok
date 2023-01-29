@@ -19,7 +19,11 @@ public class TwokViewAdapter extends RecyclerView.Adapter<TwokViewHolder> {
     private LayoutInflater inflater = LayoutInflater.from(ContextSupplier.getContext());
     private ArrayList<TwokModel> twokArrayList;
 
+
     public TwokViewAdapter(ArrayList<TwokModel> twokArrayList) {
+        this.twokArrayList = twokArrayList;
+    }
+    public void setTwokArrayList(ArrayList<TwokModel> twokArrayList) {
         this.twokArrayList = twokArrayList;
     }
 

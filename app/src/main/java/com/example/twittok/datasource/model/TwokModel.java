@@ -16,6 +16,8 @@ public class TwokModel {
     private Double lat = null;
     private Double lon = null;
 
+//    private boolean isFollowed;
+
     public TwokModel() {
     }
 
