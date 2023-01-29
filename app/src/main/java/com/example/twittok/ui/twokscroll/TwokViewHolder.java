@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
 import com.example.twittok.datasource.model.TwokModel;
-import com.example.twittok.repositories.TwokRepository;
+import com.example.twittok.utils.wrapper.TwokUserWrapper;
 
 public class TwokViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,15 +32,14 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         followButton = itemView.findViewById(R.id.followButton);
     }
 
-    public void updateContent(TwokRepository twokRepository) {
-        TwokModel twokToShow = twokRepository.getTwok();
-//        Log.d(TAG, "updateContent: the author is followed?" + twokToShow.isFollowed());
+    public void updateContent(TwokUserWrapper twokData) {
+        TwokModel twokToShow = twokData.getTwok();
+        Log.d(TAG, "updateContent: the author is followed?" + twokData.isFollowed());
         //extract all twok properties
         //assign to views the twok properties
         twokContent.setText(twokToShow.getText());
         userName.setText(twokToShow.getName());
-//        userPicture.setImageBitmap(); -> a fucking mess
-        // check on room the version, if correspondant load it from room, if otherwise callGetPicture
+        userPicture.setImageBitmap(twokData.getImage());
         // followButton -> callIsFollowed if yes display Unfollow, if no Follow
         // implement the onclick function to block the button after a click and call the right api (Follor or unfollow)
     }
