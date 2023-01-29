@@ -15,6 +15,7 @@ import com.example.twittok.datasource.network.UserNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
 import com.example.twittok.datasource.model.SidModel;
 import com.example.twittok.repositories.SidRepository;
+import com.example.twittok.repositories.UserRepository;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d(TAG, "onCreate: " + sidLocalDataSource.getSid());
 
 //        Log.d(TAG, "onCreate: " + new SidModel().getSid());
+
+//        //ROOM TEST
+//        UserRepository userRepository = new UserRepository();
+//        userRepository.insertProva();
     }
 
     @Override //implements backstack

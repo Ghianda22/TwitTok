@@ -1,4 +1,4 @@
-package com.example.twittok.datasource.network.config;
+package com.example.twittok.datasource;
 
 import android.app.Application;
 import android.content.Context;
