@@ -44,9 +44,17 @@ public class TwokRepository {
             Log.d(TAG, "checkImageSaved: the user is " + userResponse);
             //ROOM TEST
             UserRepository userRepository = new UserRepository();
-            userRepository.insertProva(userResponse);
-            UserEntity retrievedUser = userRepository.getProva(userResponse.getUid());
-            Log.d(TAG, "checkImageSaved: db returned " + retrievedUser);
+            userRepository.insertProva(userResponse, new Runnable() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "run: siamo nel listener del db, ma anche nel runnable");
+                    userRepository.getProva(userResponse.getUid(), userEntity -> {
+                        Log.d(TAG, "checkImageSaved: questo è l'utente preso! " + userEntity);
+                    });
+                }
+            });
+
+
         });
     }
 

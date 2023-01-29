@@ -16,7 +16,6 @@ public abstract class LocalDataSource extends RoomDatabase {
         if(instance == null){
             instance = Room
                     .databaseBuilder(ContextSupplier.getContext(), LocalDataSource.class, "twittok_db")
-                    .allowMainThreadQueries()
                     .build();
         }
         return instance;
