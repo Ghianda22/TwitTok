@@ -1,6 +1,5 @@
 package com.example.twittok.repositories;
 
-import com.example.twittok.datasource.model.IsFollowed;
 import com.example.twittok.datasource.model.TwokModel;
 import com.example.twittok.datasource.network.FollowNetworkDataSource;
 import com.example.twittok.datasource.network.TwokNetworkDataSource;
@@ -22,18 +21,18 @@ public class TwokRepository {
     public void loadTwok(OnTwokReadyListener onTwokReadyListener){
         TwokNetworkDataSource.callGetTwok(new RequestBody(), twokResponse -> {
             twok = twokResponse;
-//            checkIfFollowed(twok);
+            checkIfFollowed(twok);
 //            checkImageSaved(twok.getUid());
             onTwokReadyListener.onTwokReady(this);
         });
     }
 
-//    public void checkIfFollowed(TwokModel twok){
-//        FollowNetworkDataSource.callIsFollowed(
-//                new RequestBody(twok.getUid()),
-//                isFollowed1 -> isFollowed = isFollowed1.getFollowed()
-//        );
-//    }
+    public void checkIfFollowed(TwokModel twok){ //technically parameter is useless
+        FollowNetworkDataSource.callIsFollowed(
+                new RequestBody(twok.getUid()),
+                isFollowedResponse -> isFollowed = isFollowedResponse.getFollowed()
+        );
+    }
     public void checkImageSaved(Integer uid){
         //implement room db
 
@@ -47,13 +46,13 @@ public class TwokRepository {
         this.twok = twok;
     }
 
-//    public boolean isFollowed() {
-//        return isFollowed;
-//    }
-//
-//    public void setFollowed(boolean followed) {
-//        isFollowed = followed;
-//    }
+    public boolean isFollowed() {
+        return isFollowed;
+    }
+
+    public void setFollowed(boolean followed) {
+        isFollowed = followed;
+    }
 
     @Override
     public String toString() {

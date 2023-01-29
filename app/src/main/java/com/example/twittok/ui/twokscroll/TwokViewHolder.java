@@ -1,5 +1,6 @@
 package com.example.twittok.ui.twokscroll;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
     private TextView userName;
     private ImageView userPicture;
     private Button followButton;
+    private static final String TAG = "TWOK_HOLDER";
 
 
 
@@ -32,6 +34,7 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
 
     public void updateContent(TwokRepository twokToShow) {
         TwokModel twokContent = twokToShow.getTwok();
+//        Log.d(TAG, "updateContent: the author is followed?" + twokToShow.isFollowed());
         //extract all twok properties
         //assign to views the twok properties
         twokContent.setText(twokContent.getText());
