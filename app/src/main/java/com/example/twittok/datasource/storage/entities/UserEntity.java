@@ -7,12 +7,12 @@ import androidx.room.PrimaryKey;
 public class UserEntity {
     @PrimaryKey
     private Integer uid;
-    private Integer pVersion;
+    private Integer pversion;
     private String picture;
 
-    public UserEntity(Integer uid, Integer pVersion, String picture) {
+    public UserEntity(Integer uid, Integer pversion, String picture) {
         this.uid = uid;
-        this.pVersion = pVersion;
+        this.pversion = pversion;
         this.picture = picture;
     }
 
@@ -24,12 +24,12 @@ public class UserEntity {
         this.uid = uid;
     }
 
-    public Integer getpVersion() {
-        return pVersion;
+    public Integer getPversion() {
+        return pversion;
     }
 
-    public void setpVersion(Integer pVersion) {
-        this.pVersion = pVersion;
+    public void setPversion(Integer pversion) {
+        this.pversion = pversion;
     }
 
     public String getPicture() {
@@ -38,5 +38,14 @@ public class UserEntity {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "\n   uid=" + uid +
+                ",\n    pversion=" + pversion +
+                ",\n    picture='" + picture + '\'' +
+                '}';
     }
 }

@@ -1,9 +1,13 @@
 package com.example.twittok.repositories;
 
+import android.util.Log;
+
 import com.example.twittok.datasource.model.TwokModel;
 import com.example.twittok.datasource.network.FollowNetworkDataSource;
 import com.example.twittok.datasource.network.TwokNetworkDataSource;
+import com.example.twittok.datasource.network.UserNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
+import com.example.twittok.datasource.storage.entities.UserEntity;
 import com.example.twittok.listeners.OnTwokReadyListener;
 
 public class TwokRepository {
@@ -21,21 +25,29 @@ public class TwokRepository {
     public void loadTwok(OnTwokReadyListener onTwokReadyListener){
         TwokNetworkDataSource.callGetTwok(new RequestBody(), twokResponse -> {
             twok = twokResponse;
-            checkIfFollowed(twok);
-//            checkImageSaved(twok.getUid());
+//            checkIfFollowed(twok);
+            checkImageSaved(twok.getUid());
             onTwokReadyListener.onTwokReady(this);
         });
     }
 
-    public void checkIfFollowed(TwokModel twok){ //technically parameter is useless
-        FollowNetworkDataSource.callIsFollowed(
-                new RequestBody(twok.getUid()),
-                isFollowedResponse -> isFollowed = isFollowedResponse.getFollowed()
-        );
-    }
+//    public void checkIfFollowed(TwokModel twok){ //technically parameter is useless
+//        FollowNetworkDataSource.callIsFollowed(
+//                new RequestBody(twok.getUid()),
+//                isFollowedResponse -> isFollowed = isFollowedResponse.getFollowed()
+//        );
+//    }
     public void checkImageSaved(Integer uid){
         //implement room db
-
+        Log.d(TAG, "checkImageSaved: " + uid);
+        UserNetworkDataSource.callGetPicture(new RequestBody(uid), userResponse -> {
+            Log.d(TAG, "checkImageSaved: the user is " + userResponse);
+            //ROOM TEST
+            UserRepository userRepository = new UserRepository();
+            userRepository.insertProva(userResponse);
+            UserEntity retrievedUser = userRepository.getProva(userResponse.getUid());
+            Log.d(TAG, "checkImageSaved: db returned " + retrievedUser);
+        });
     }
 
     public TwokModel getTwok() {

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.twittok.datasource.network.config.ContextSupplier;
 import com.example.twittok.datasource.model.SidModel;
 
 //key-value local data source
