@@ -1,13 +1,13 @@
-package com.example.twittok.repositories;
+package com.example.twittok.datasource.model;
 
-public class UserRepository {
+public class UserModel {
     private Integer uid;
     private String sid;
     private String name;
     private String picture;
     private Integer pversion;
 
-    public UserRepository() {
+    public UserModel() {
     }
 
     public Integer getUid() {
@@ -52,7 +52,7 @@ public class UserRepository {
 
     @Override
     public String toString() {
-        return "\nUserRepository{" +
+        return "\nUserModel{" +
                 "\n    uid=" + uid +
                 ", \n    sid='" + sid + '\'' +
                 ", \n    name='" + name + '\'' +

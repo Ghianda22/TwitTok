@@ -1,73 +1,64 @@
 package com.example.twittok.repositories;
 
+import com.example.twittok.datasource.model.TwokModel;
+import com.example.twittok.datasource.network.FollowNetworkDataSource;
+import com.example.twittok.datasource.network.TwokNetworkDataSource;
+import com.example.twittok.datasource.network.config.RequestBody;
+import com.example.twittok.listeners.OnTwokReadyListener;
+
 public class TwokRepository {
-    private Integer uid;
-    private String name;
-    private Integer pversion;
-    private Integer tid;
+    /*  handles the calls from network:
+     *   getTwok -> to get the requested twok
+     *   isFollowed -> check if the author is followed
+     *   check if author image is in the DB
+     *   if so -> convert it
+     * */
 
-    private String text;
-    private String bgcol;
-    private String fontcol;
-    private Integer fontsize;
-    private Integer fonttype;
-    private Integer halign;
-    private Integer valign;
-    private Double lat = null;
-    private Double lon = null;
+    private static final String TAG = "TWOK_REPOSITORY";
+    private TwokModel twok;
+    private boolean isFollowed;
 
-    public TwokRepository() {
+    public void loadTwok(OnTwokReadyListener onTwokReadyListener){
+        TwokNetworkDataSource.callGetTwok(new RequestBody(), twokResponse -> {
+            twok = twokResponse;
+            checkIfFollowed(twok);
+//            checkImageSaved(twok.getUid());
+            onTwokReadyListener.onTwokReady(this);
+        });
     }
 
+    public void checkIfFollowed(TwokModel twok){ //technically parameter is useless
+        FollowNetworkDataSource.callIsFollowed(
+                new RequestBody(twok.getUid()),
+                isFollowedResponse -> isFollowed = isFollowedResponse.getFollowed()
+        );
+    }
+    public void checkImageSaved(Integer uid){
+        //implement room db
 
-    //without position
-    public TwokRepository(Integer uid, String name, Integer pversion, Integer tid, String text, String bgcol, String fontcol, Integer fontsize, Integer fonttype, Integer halign, Integer valign) {
-        this.uid = uid;
-        this.name = name;
-        this.pversion = pversion;
-        this.tid = tid;
-        this.text = text;
-        this.bgcol = bgcol;
-        this.fontcol = fontcol;
-        this.fontsize = fontsize;
-        this.fonttype = fonttype;
-        this.halign = halign;
-        this.valign = valign;
     }
 
-    //with position
-    public TwokRepository(Integer uid, String name, Integer pversion, Integer tid, String text, String bgcol, String fontcol, Integer fontsize, Integer fonttype, Integer halign, Integer valign, Double lat, Double lon) {
-        this.uid = uid;
-        this.name = name;
-        this.pversion = pversion;
-        this.tid = tid;
-        this.text = text;
-        this.bgcol = bgcol;
-        this.fontcol = fontcol;
-        this.fontsize = fontsize;
-        this.fonttype = fonttype;
-        this.halign = halign;
-        this.valign = valign;
-        this.lat = lat;
-        this.lon = lon;
+    public TwokModel getTwok() {
+        return twok;
+    }
+
+    public void setTwok(TwokModel twok) {
+        this.twok = twok;
+    }
+
+    public boolean isFollowed() {
+        return isFollowed;
+    }
+
+    public void setFollowed(boolean followed) {
+        isFollowed = followed;
     }
 
     @Override
     public String toString() {
-        return "\nTwokRepository{" +
-                "\n    uid=" + uid +
-                ", \n    name='" + name + '\'' +
-                ", \n    pversion=" + pversion +
-                ", \n    tid=" + tid +
-                ", \n    text='" + text + '\'' +
-                ", \n    bgcol='" + bgcol + '\'' +
-                ", \n    fontcol='" + fontcol + '\'' +
-                ", \n    fontsize=" + fontsize +
-                ", \n    fonttype=" + fonttype +
-                ", \n    halign=" + halign +
-                ", \n    valign=" + valign +
-                ", \n    lat=" + lat +
-                ", \n    lon=" + lon +
-                "\n}";
+        return "TwokRepository{" +
+                "twok=" + twok +
+                ", isFollowed=" + isFollowed +
+                '}';
     }
 }

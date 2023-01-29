@@ -5,7 +5,8 @@ import android.util.Log;
 import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
-import com.example.twittok.repositories.TwokRepository;
+import com.example.twittok.datasource.model.TwokModel;
+import com.example.twittok.listeners.OnTwokLoadedListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,21 +15,20 @@ import retrofit2.Response;
 public class TwokNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "TWOK_network";
-    //todo add listener
-
 
     //sid, uid, tid
-    public static void callGetTwok(RequestBody body) {
-        Call<TwokRepository> getTwokCall = apiInterface.getTwok(body);
-        getTwokCall.enqueue(new Callback<TwokRepository>() {
+    public static void callGetTwok(RequestBody body, OnTwokLoadedListener onTwokLoadedListener) {
+        Call<TwokModel> getTwokCall = apiInterface.getTwok(body);
+        getTwokCall.enqueue(new Callback<TwokModel>() {
             @Override
-            public void onResponse(Call<TwokRepository> call, Response<TwokRepository> response) {
+            public void onResponse(Call<TwokModel> call, Response<TwokModel> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
+                onTwokLoadedListener.onTwokLoaded(response.body());
             }
 
             @Override
-            public void onFailure(Call<TwokRepository> call, Throwable t) {
+            public void onFailure(Call<TwokModel> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
@@ -36,7 +36,7 @@ public class TwokNetworkDataSource {
     }
 
     //sid, twok specifics
-    public static void callAddTwok(RequestBody body) {
+    public void callAddTwok(RequestBody body) {
         Call<Object> addTwokCall = apiInterface.addTwok(body);
         addTwokCall.enqueue(new Callback<Object>() {
             @Override

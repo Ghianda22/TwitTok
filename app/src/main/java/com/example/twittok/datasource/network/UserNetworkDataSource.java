@@ -5,7 +5,8 @@ import android.util.Log;
 import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
-import com.example.twittok.repositories.UserRepository;
+import com.example.twittok.datasource.model.UserModel;
+import com.example.twittok.listeners.OnProfileLoadedListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,20 +15,20 @@ import retrofit2.Response;
 public class UserNetworkDataSource {
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "USER_network";
-    //todo add listener
 
     //sid -> new RequestBody
-    public static void callGetProfile(RequestBody body) {
-        Call<UserRepository> getProfile = apiInterface.getProfile(body);
-        getProfile.enqueue(new Callback<UserRepository>() {
+    public static void callGetProfile(RequestBody body, OnProfileLoadedListener onProfileLoadedListener) {
+        Call<UserModel> getProfile = apiInterface.getProfile(body);
+        getProfile.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<UserRepository> call, Response<UserRepository> response) {
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
+                onProfileLoadedListener.onProfileLoaded(response.body());
             }
 
             @Override
-            public void onFailure(Call<UserRepository> call, Throwable t) {
+            public void onFailure(Call<UserModel> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
@@ -52,17 +53,18 @@ public class UserNetworkDataSource {
     }
 
     //sid, uid
-    public static void callGetPicture(RequestBody body) {
-        Call<UserRepository> getPictureCall = apiInterface.getPicture(body);
-        getPictureCall.enqueue(new Callback<UserRepository>() {
+    public static void callGetPicture(RequestBody body, OnProfileLoadedListener onProfileLoadedListener) {
+        Call<UserModel> getPictureCall = apiInterface.getPicture(body);
+        getPictureCall.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<UserRepository> call, Response<UserRepository> response) {
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
+                onProfileLoadedListener.onProfileLoaded(response.body());
             }
 
             @Override
-            public void onFailure(Call<UserRepository> call, Throwable t) {
+            public void onFailure(Call<UserModel> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
