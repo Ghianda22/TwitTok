@@ -57,8 +57,10 @@ public class UserRepository {
             if (userEntity == null || userEntity.getPversion() < pVersion) {
                 UserNetworkDataSource.callGetPicture(new RequestBody(uid), userResponse -> {
                     insertUser(userResponse);
-                    Bitmap convertedImage = ImageConverter.base64ToBitmap(userResponse.getPicture());
-                    onImageReadyListener.onImageReady(convertedImage);
+                    if (userResponse.getPicture() != null) {
+                        Bitmap convertedImage = convertedImage = ImageConverter.base64ToBitmap(userResponse.getPicture());
+                        onImageReadyListener.onImageReady(convertedImage);
+                    }
                 });
             }
         });
