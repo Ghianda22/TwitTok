@@ -7,53 +7,83 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.twittok.R;
 import com.example.twittok.databinding.FragmentFollowedBinding;
-import com.example.twittok.databinding.FragmentHomeBinding;
-import com.example.twittok.ui.home.HomeFragmentDirections;
+import com.example.twittok.repositories.SidRepository;
+
+import java.util.ArrayList;
 
 public class FollowedFragment extends Fragment {
-
-    private FollowedViewModel mViewModel;
+    // --- ATTRIBUTES ------------------------------------------
+    private FollowedViewModel followedViewModel;
     private FragmentFollowedBinding binding;
+    private static final String TAG = "HOME_FRAGMENT";
 
+    // --- CONSTRUCTORS ---------------------------------------------------------------------------------
     public static FollowedFragment newInstance() {
         return new FollowedFragment();
     }
 
+
+
+
+    // --- METHODS ------------------------------------------
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentFollowedBinding.inflate(inflater, container, false);
-
-
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //NAVIGATION - experiment to test values passing in an action
-        //TODO - pass the uid of the selected user
-        Integer uid = 23151;
-        binding.button.setOnClickListener(clickedView -> {
-            NavDirections action = FollowedFragmentDirections.actionNavDirectionFollowedToUserBoardFragment(uid);
-            Navigation.findNavController(clickedView).navigate(action);
-        });
+        followedViewModel = new ViewModelProvider(this).get(FollowedViewModel.class);
+
+        RecyclerView recyclerView = binding.followedListContainer;
+        FollowedViewAdapter followedViewAdapter = new FollowedViewAdapter(new ArrayList<>());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        if (followedViewModel.isEmpty()) {
+            Log.d(TAG, "onViewCreated: followed list is empty");
+            followedViewModel.addFollowed();
+        }
+        followedViewModel.getNoFollowed().observe(
+                getViewLifecycleOwner(),
+                result -> {
+                    Log.d(TAG, "onViewCreated: noFollowed = " + result);
+                    binding.noFollowed.setVisibility(View.VISIBLE);
+                }
+        );
+
+        followedViewModel.getListOfFollowed().observe(
+                getViewLifecycleOwner(),
+                listOfFollowed -> {
+                    Log.d(TAG, "onViewCreated: noFollowed = " + followedViewModel.getNoFollowed());
+                    Log.d(TAG, "onViewCreated: followed list length " + listOfFollowed.size());
+                    binding.spinningWheel.setVisibility(View.GONE);
+                    if(listOfFollowed.size() > 0)
+                        binding.noFollowed.setVisibility(View.GONE);
+                    followedViewAdapter.setFollowedArrayList(listOfFollowed);
+                    recyclerView.setAdapter(followedViewAdapter);
+                }
+        );
     }
+
+
+
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(FollowedViewModel.class);
-        // TODO: Use the ViewModel
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+        followedViewModel = null;
     }
-
 }

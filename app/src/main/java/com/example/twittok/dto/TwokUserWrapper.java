@@ -1,4 +1,4 @@
-package com.example.twittok.utils.wrapper;
+package com.example.twittok.dto;
 
 import android.graphics.Bitmap;
 

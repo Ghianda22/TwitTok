@@ -9,5 +9,6 @@
     <string name="view_placeholder_twok">Here the twok text</string>
     <string name="view_placeholder_twok_create">Tap here to write your twok</string>
     <string name="button_follow_text">Follow</string>
+    <string name="view_placeholder_no_followed">To see your friends list you have to follow someone</string>
     <string name="button_position_text">Show Position</string>
 </resources>

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
 import com.example.twittok.datasource.model.TwokModel;
-import com.example.twittok.utils.wrapper.TwokUserWrapper;
+import com.example.twittok.dto.TwokUserWrapper;
 
 public class TwokViewHolder extends RecyclerView.ViewHolder {
 
