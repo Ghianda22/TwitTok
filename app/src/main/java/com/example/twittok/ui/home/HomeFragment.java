@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private boolean firstTime;
     private static final String TAG = "HOME_FRAGMENT";
-    private final int bufferSize = 2;
+    private final int bufferSize = 5;
 
 
     public static HomeFragment newInstance() {

@@ -1,11 +1,7 @@
 package com.example.twittok.repositories;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.util.Log;
 
-import com.example.twittok.R;
 import com.example.twittok.datasource.ContextSupplier;
 import com.example.twittok.datasource.model.UserModel;
 import com.example.twittok.datasource.network.UserNetworkDataSource;
@@ -54,15 +50,11 @@ public class UserRepository {
             if (userEntity == null || userEntity.getPversion() < pVersion) {
                 UserNetworkDataSource.callGetPicture(new RequestBody(uid), userResponse -> {
                     insertUser(userResponse);
-                    if (userResponse.getPicture() != null) {
-                        //implement external library call to assure that base64 is actually an image
-                        Log.d(TAG, "checkImageVersion: user response" + userResponse);
-                    }
-                        onImageReadyListener.onImageReady(ImageConverter.convertImage(userResponse.getPicture()));
+                    onImageReadyListener.onImageReady(ImageConverter.convertImageToBitmap(userResponse.getPicture()));
                 });
 
-            }else{ //it's saved
-                onImageReadyListener.onImageReady(ImageConverter.convertImage(userEntity.getPicture()));
+            } else { //it's saved
+                onImageReadyListener.onImageReady(ImageConverter.convertImageToBitmap(userEntity.getPicture()));
             }
         });
 
@@ -74,7 +66,6 @@ public class UserRepository {
         --> else return from db
         * */
     }
-
 
 
 }
