@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
@@ -20,6 +23,7 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
     private TextView userName;
     private ImageView userPicture;
     private Button followButton;
+    private Button positionButton;
     private static final String TAG = "TWOK_HOLDER";
 
 
@@ -30,6 +34,7 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         userName = itemView.findViewById(R.id.userName);
         userPicture = itemView.findViewById(R.id.userPicture);
         followButton = itemView.findViewById(R.id.followButton);
+        positionButton = itemView.findViewById(R.id.positionButton);
     }
 
     public void updateContent(TwokUserWrapper twokData) {
@@ -40,6 +45,16 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         twokContent.setText(twokToShow.getText());
         userName.setText(twokToShow.getName());
         userPicture.setImageBitmap(twokData.getImage());
+        if(twokToShow.getLat() != null & twokToShow.getLon() != null){
+            positionButton.setVisibility(View.VISIBLE);
+            positionButton.setOnClickListener(clickedView -> {
+                NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToMapsFragment(
+                        twokToShow.getLat().floatValue(),
+                        twokToShow.getLon().floatValue()
+                );
+                Navigation.findNavController(clickedView).navigate(action);
+            });
+        }else positionButton.setVisibility(View.GONE);
         // followButton -> callIsFollowed if yes display Unfollow, if no Follow
         // implement the onclick function to block the button after a click and call the right api (Follor or unfollow)
     }

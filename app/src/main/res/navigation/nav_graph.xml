@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_nav_direction_home_to_userBoardFragment"
             app:destination="@id/userBoardFragment" />
+        <action
+            android:id="@+id/action_nav_direction_home_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
 
     <fragment
@@ -45,5 +48,20 @@
         <argument
             android:name="selectedUser"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_userBoardFragment_to_mapsFragment2"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.twittok.ui.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <argument
+            android:name="lat"
+            app:argType="float" />
+        <argument
+            android:name="lon"
+            app:argType="float" />
     </fragment>
 </navigation>

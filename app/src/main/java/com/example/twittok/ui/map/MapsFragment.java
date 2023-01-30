@@ -32,8 +32,9 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-//            here i get passed arguments via navigation and set variables
-            LatLng sydney = new LatLng(-34, 151);
+            float lat = MapsFragmentArgs.fromBundle(getArguments()).getLat();
+            float lon = MapsFragmentArgs.fromBundle(getArguments()).getLon();
+            LatLng sydney = new LatLng(lat, lon);
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         }
