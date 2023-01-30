@@ -17,9 +17,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FollowNetworkDataSource {
+    // --- ATTRIBUTES ---------------------------------------------------------------------------------
     private static final ApiInterface apiInterface = ConfigNetworkDataSource.getApiInterface();
     private static final String TAG = "FOLLOW_network";
 
+
+
+    // --- METHODS ---------------------------------------------------------------------------------
     //sid, uid
     public static void callFollow(RequestBody body) {
         Call<Object> followCall = apiInterface.follow(body);
@@ -37,7 +41,6 @@ public class FollowNetworkDataSource {
         });
 
     }
-
     public static void callUnfollow(RequestBody body) {
         Call<Object> unfollowCall = apiInterface.unfollow(body);
         unfollowCall.enqueue(new Callback<Object>() {
@@ -54,7 +57,6 @@ public class FollowNetworkDataSource {
         });
 
     }
-
     //sid
     public static void callGetFollowed(RequestBody body, OnFollowedListLoadedListener followedListLoadedListener) {
         Call<ArrayList<UserModel>> getFollowedCall = apiInterface.getFollowed(body);
@@ -72,9 +74,7 @@ public class FollowNetworkDataSource {
                 Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
             }
         });
-
     }
-
     //sid, uid
     public static void callIsFollowed(RequestBody body, OnIsFollowedLoadedListener onIsFollowedLoadedListener) {
         Call<IsFollowed> isFollowedCall = apiInterface.isFollowed(body);

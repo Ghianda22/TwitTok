@@ -1,18 +1,20 @@
 package com.example.twittok.dto;
 
+import android.graphics.Bitmap;
+
 import com.example.twittok.datasource.model.UserModel;
 
 public class FollowedUserWrapper {
 
     // --- ATTRIBUTES ------------------------------------------
     private UserModel user;
-    private String image;
+    private Bitmap image;
 
 
     // --- CONSTRUCTORS ------------------------------------------
     public FollowedUserWrapper() {
     }
-    public FollowedUserWrapper(UserModel user, String image) {
+    public FollowedUserWrapper(UserModel user, Bitmap image) {
         this.user = user;
         this.image = image;
     }
@@ -25,10 +27,10 @@ public class FollowedUserWrapper {
     public void setUser(UserModel user) {
         this.user = user;
     }
-    public String getImage() {
+    public Bitmap getImage() {
         return image;
     }
-    public void setImage(String image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 
