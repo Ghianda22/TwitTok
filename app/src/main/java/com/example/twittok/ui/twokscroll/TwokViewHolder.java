@@ -1,4 +1,5 @@
 package com.example.twittok.ui.twokscroll;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -71,8 +72,8 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         styleFollowButton(twokToShowData.isFollowed());
         followButton.setOnClickListener(view -> {
             view.setClickable(false);
+            styleFollowButton(!twokToShowData.isFollowed());
             twokToShowData.getOnFollowToggleClickListener().onFollowToggleClick(twokToShow.getUid());
-//            styleFollowButton(twokToShowData.isFollowed());
         });
 
 // --- TWOK CONTENT --------------------------------------------------------------------------------
@@ -180,9 +181,9 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
     public void styleFollowButton(boolean isFollowed){
         if(isFollowed){
             followButton.setText(R.string.button_unfollow_text);
-            followButton.setBackgroundColor(ContextSupplier.getContext().getColor((R.color.grey)));
-            followButton.setTextColor(ContextSupplier.getContext().getColor(R.color.purple));
+            followButton.setBackgroundTintList(ColorStateList.valueOf(ContextSupplier.getContext().getColor((R.color.grey))));
         }else{
+            followButton.setBackgroundTintList(ColorStateList.valueOf(ContextSupplier.getContext().getColor((R.color.purple))));
             followButton.setText(R.string.button_follow_text);
         }
     }
