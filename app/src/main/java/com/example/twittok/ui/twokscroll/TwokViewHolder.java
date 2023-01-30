@@ -21,7 +21,8 @@ import com.example.twittok.dto.TwokUserWrapper;
 
 public class TwokViewHolder extends RecyclerView.ViewHolder {
 
-    //create here all views to be updated in twokToShow_item
+    // --- ATTRIBUTES ----------------------------------------------------------------------------
+
     private TextView twokContent;
     private TextView userName;
     private ImageView userPicture;
