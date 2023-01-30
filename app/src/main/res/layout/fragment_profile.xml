@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/profileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nav_menu_item_profile"
@@ -41,6 +41,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/view_placeholder_profile_name"
+        android:hint="type your username here"
         android:textAlignment="center"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
