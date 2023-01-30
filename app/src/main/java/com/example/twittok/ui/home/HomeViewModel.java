@@ -38,6 +38,9 @@ public class HomeViewModel extends ViewModel {
                                 twokResponse.getUid(),
                                 isFollowed -> {
                                     twokUserWrapper.setFollowed(isFollowed.getFollowed());
+                                    twokUserWrapper.setOnFollowToggleClickListener(uid -> {
+                                        followToggle(uid, isFollowed.getFollowed());
+                                    });
                                     append(twokUserWrapper);
 
                                 });
@@ -45,10 +48,19 @@ public class HomeViewModel extends ViewModel {
         });
     }
 
+    public void followToggle(Integer uid, boolean isFollowed) {
+        if(isFollowed){
+            new FollowedRepository().unfollow(uid);
+        }else{
+            new FollowedRepository().follow(uid);
+        }
+    }
+
     public void append(TwokUserWrapper newTwok) {
         twokArrayList.getValue().add(newTwok);
         twokArrayList.postValue(twokArrayList.getValue());
     }
+
 
     public boolean isEmpty() {
         if (twokArrayList == null) return true;

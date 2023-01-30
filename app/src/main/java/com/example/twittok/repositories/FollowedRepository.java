@@ -24,5 +24,12 @@ public class FollowedRepository {
         );
     }
 
+    public void follow(Integer uid){
+        FollowNetworkDataSource.callFollow(new RequestBody(uid));
+    }
+    public void unfollow(Integer uid){
+        FollowNetworkDataSource.callUnfollow(new RequestBody(uid));
+    }
+
 
 }
