@@ -76,4 +76,14 @@ public class FollowedFragment extends Fragment {
                 }
         );
     }
+
+
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+        followedViewModel = null;
+    }
 }

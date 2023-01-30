@@ -33,11 +33,11 @@ public class FollowedViewModel extends ViewModel {
         --> pass uid to UserRepo and wait for image
         --> create TwokUserWrapper and append it to the list
         */
-        FollowedUserWrapper followedUserWrapper = new FollowedUserWrapper();
         new FollowedRepository().getListOfFollowed(listOfUsers -> {
             if (listOfUsers.size() > 0) {
                 Log.d(TAG, "addFollowed: list of follwed = " + listOfUsers);
                 listOfUsers.forEach(followedUser -> {
+                    FollowedUserWrapper followedUserWrapper = new FollowedUserWrapper();
                     Log.d(TAG, "addFollowed: foreach");
                     followedUserWrapper.setUser(followedUser);
                     new UserRepository().checkImageVersion(

@@ -32,11 +32,16 @@ public class HomeViewModel extends ViewModel {
             twokUserWrapper.setTwok(twokResponse);
             new UserRepository().checkImageVersion(
                     twokResponse.getUid(), twokResponse.getPversion(),
-                    updatedImage -> twokUserWrapper.setImage(updatedImage));
-            new FollowedRepository().checkIfFollowed(
-                    twokResponse.getUid(),
-                    isFollowed -> twokUserWrapper.setFollowed(isFollowed.getFollowed()));
-            append(twokUserWrapper);
+                    updatedImage -> {
+                        twokUserWrapper.setImage(updatedImage);
+                        new FollowedRepository().checkIfFollowed(
+                                twokResponse.getUid(),
+                                isFollowed -> {
+                                    twokUserWrapper.setFollowed(isFollowed.getFollowed());
+                                    append(twokUserWrapper);
+
+                                });
+                    });
         });
     }
 
