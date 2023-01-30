@@ -1,4 +1,4 @@
-package com.example.twittok.listeners;
+package com.example.twittok.listeners.ready;
 
 import android.graphics.Bitmap;
 

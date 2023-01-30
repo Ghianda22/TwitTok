@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.twittok.datasource.SidLocalDataSource;
 import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
-import com.example.twittok.listeners.OnSidLoadedListener;
+import com.example.twittok.listeners.loaded.OnSidLoadedListener;
 import com.example.twittok.datasource.model.SidModel;
 
 import retrofit2.Call;

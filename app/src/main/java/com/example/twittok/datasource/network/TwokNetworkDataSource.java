@@ -6,7 +6,7 @@ import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
 import com.example.twittok.datasource.model.TwokModel;
-import com.example.twittok.listeners.OnTwokLoadedListener;
+import com.example.twittok.listeners.loaded.OnTwokLoadedListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;

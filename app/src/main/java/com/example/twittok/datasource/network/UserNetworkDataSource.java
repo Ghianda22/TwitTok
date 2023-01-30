@@ -6,7 +6,7 @@ import com.example.twittok.datasource.network.config.ApiInterface;
 import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
 import com.example.twittok.datasource.model.UserModel;
-import com.example.twittok.listeners.OnProfileLoadedListener;
+import com.example.twittok.listeners.loaded.OnUserLoadedListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,14 +20,14 @@ public class UserNetworkDataSource {
 
 
     //sid, uid
-    public static void callGetPicture(RequestBody body, OnProfileLoadedListener onProfileLoadedListener) {
+    public static void callGetPicture(RequestBody body, OnUserLoadedListener onUserLoadedListener) {
         Call<UserModel> getPictureCall = apiInterface.getPicture(body);
         getPictureCall.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
                 Log.d(TAG, "onResponse: " + response.body());
-                onProfileLoadedListener.onProfileLoaded(response.body());
+                onUserLoadedListener.onUserLoaded(response.body());
             }
 
             @Override
