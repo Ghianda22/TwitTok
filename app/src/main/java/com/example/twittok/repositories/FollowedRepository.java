@@ -2,7 +2,7 @@ package com.example.twittok.repositories;
 
 import com.example.twittok.datasource.network.FollowNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
-import com.example.twittok.listeners.OnIsFollowedLoadedListener;
+import com.example.twittok.listeners.loaded.OnIsFollowedLoadedListener;
 
 public class FollowedRepository {
 

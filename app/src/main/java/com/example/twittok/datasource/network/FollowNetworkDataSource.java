@@ -7,8 +7,8 @@ import com.example.twittok.datasource.network.config.ConfigNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
 import com.example.twittok.datasource.model.IsFollowed;
 import com.example.twittok.datasource.model.UserModel;
-import com.example.twittok.listeners.OnFollowedListLoadedListener;
-import com.example.twittok.listeners.OnIsFollowedLoadedListener;
+import com.example.twittok.listeners.loaded.OnFollowedListLoadedListener;
+import com.example.twittok.listeners.loaded.OnIsFollowedLoadedListener;
 
 import java.util.ArrayList;
 

@@ -2,7 +2,7 @@ package com.example.twittok.repositories;
 
 import com.example.twittok.datasource.SidLocalDataSource;
 import com.example.twittok.datasource.network.SidNetworkDataSource;
-import com.example.twittok.listeners.OnSidLoadedListener;
+import com.example.twittok.listeners.loaded.OnSidLoadedListener;
 
 
 public class SidRepository {
