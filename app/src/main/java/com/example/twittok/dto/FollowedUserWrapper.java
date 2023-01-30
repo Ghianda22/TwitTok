@@ -3,24 +3,22 @@ package com.example.twittok.dto;
 import android.graphics.Bitmap;
 
 import com.example.twittok.datasource.model.UserModel;
+import com.example.twittok.listeners.click.OnFollowToggleClickListener;
 
 public class FollowedUserWrapper {
 
     // --- ATTRIBUTES ------------------------------------------
     private UserModel user;
     private Bitmap image;
+    private OnFollowToggleClickListener onFollowToggleClickListener;
 
 
     // --- CONSTRUCTORS ------------------------------------------
     public FollowedUserWrapper() {
     }
-    public FollowedUserWrapper(UserModel user, Bitmap image) {
-        this.user = user;
-        this.image = image;
-    }
+
 
     // --- GETTERS & SETTERS ------------------------------------------
-
     public UserModel getUser() {
         return user;
     }
@@ -33,11 +31,16 @@ public class FollowedUserWrapper {
     public void setImage(Bitmap image) {
         this.image = image;
     }
+    public OnFollowToggleClickListener getOnFollowToggleClickListener() {
+        return onFollowToggleClickListener;
+    }
+    public void setOnFollowToggleClickListener(OnFollowToggleClickListener onFollowToggleClickListener) {
+        this.onFollowToggleClickListener = onFollowToggleClickListener;
+    }
 
 
-    // --- METHODS ------------------------------------------
 
-
+// --- METHODS ------------------------------------------
     @Override
     public String toString() {
         return "FollowedUserWrapper{" +
