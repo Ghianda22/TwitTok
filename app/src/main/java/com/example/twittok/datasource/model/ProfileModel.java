@@ -1,21 +1,23 @@
 package com.example.twittok.datasource.model;
 
-public class UserModel {
+public class ProfileModel {
     // --- ATTRIBUTES ------------------------------------------
     private Integer uid;
+    private String sid;
     private String name;
-    private Integer pversion;
     private String picture;
+    private Integer pversion;
 
 
     // --- CONSTRUCTORS ------------------------------------------
-    public UserModel() {
+    public ProfileModel() {
     }
-    public UserModel(Integer uid, String name, Integer pversion, String picture) {
+    public ProfileModel(Integer uid, String sid, String name, String picture, Integer pversion) {
         this.uid = uid;
+        this.sid = sid;
         this.name = name;
-        this.pversion = pversion;
         this.picture = picture;
+        this.pversion = pversion;
     }
 
 
@@ -26,17 +28,17 @@ public class UserModel {
     public void setUid(Integer uid) {
         this.uid = uid;
     }
+    public String getSid() {
+        return sid;
+    }
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public Integer getPversion() {
-        return pversion;
-    }
-    public void setPversion(Integer pversion) {
-        this.pversion = pversion;
     }
     public String getPicture() {
         return picture;
@@ -44,18 +46,23 @@ public class UserModel {
     public void setPicture(String picture) {
         this.picture = picture;
     }
-
-    // --- METHODS ------------------------------------------
+    public Integer getPversion() {
+        return pversion;
+    }
+    public void setPversion(Integer pversion) {
+        this.pversion = pversion;
+    }
 
 
     @Override
     public String toString() {
-        return "\nUserModel{" +
+        return "\nProfileModel{" +
                 "\n    uid=" + uid +
-                ",\n    name='" + name + '\'' +
-                ",\n    pversion=" + pversion +
-                ",\n    picture='" + picture + '\'' +
+                ", \n    sid='" + sid + '\'' +
+                ", \n    name='" + name + '\'' +
+                ", \n    picture='" + picture + '\'' +
+                ", \n    pversion=" + pversion +
                 "\n}";
     }
-}
 
+}
