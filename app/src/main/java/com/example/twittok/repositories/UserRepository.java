@@ -50,9 +50,12 @@ public class UserRepository {
                 UserNetworkDataSource.callGetPicture(new RequestBody(uid), userResponse -> {
                     insertUser(userResponse);
                     if (userResponse.getPicture() != null) {
-                        //implement external library call to assure that base64 is actually an image
-                        Bitmap convertedImage = ImageConverter.base64ToBitmap(userResponse.getPicture());
-                        onImageReadyListener.onImageReady(convertedImage);
+                        try{
+                            Bitmap convertedImage = convertedImage = ImageConverter.base64ToBitmap(userResponse.getPicture());
+                            onImageReadyListener.onImageReady(convertedImage);
+                        }catch(IllegalArgumentException e){
+                            Log.d(TAG, "checkImageVersion: user " + userResponse.getUid() + " has wrong image format");
+                        }
                     }
                 });
             }
