@@ -31,12 +31,7 @@ public class TwokViewAdapter extends RecyclerView.Adapter<TwokViewHolder> {
     public void setTwokArrayList(ArrayList<TwokUserWrapper> twokArrayList) {
         this.twokArrayList = twokArrayList;
     }
-    public void setPrevPosition(int prevPosition) {
-        this.prevPosition = prevPosition;
-    }
-    public int getPrevPosition() {
-        return prevPosition;
-    }
+
 
     // --- METHODS ---------------------------------------------------------------------------------
     @NonNull

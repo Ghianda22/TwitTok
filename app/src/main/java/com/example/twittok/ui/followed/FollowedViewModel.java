@@ -38,6 +38,7 @@ public class FollowedViewModel extends ViewModel {
                 Log.d(TAG, "addFollowed: list of follwed = " + listOfUsers);
                 listOfUsers.forEach(followedUser -> {
                     FollowedUserWrapper followedUserWrapper = new FollowedUserWrapper();
+                    followedUserWrapper.setOnFollowToggleClickListener(uid -> unfollow(uid));
                     Log.d(TAG, "addFollowed: foreach");
                     followedUserWrapper.setUser(followedUser);
                     new UserRepository().checkImageVersion(
@@ -52,10 +53,21 @@ public class FollowedViewModel extends ViewModel {
         });
     }
 
+    public void unfollow(Integer uid){
+        new FollowedRepository().unfollow(uid);
+        remove(uid);
+    }
+
     public void append(FollowedUserWrapper newFollowedUser) {
         listOfFollowed.getValue().add(newFollowedUser);
         listOfFollowed.postValue(listOfFollowed.getValue());
     }
+
+    public void remove(Integer uid) {
+        listOfFollowed.getValue().removeIf(followedUserWrapper -> followedUserWrapper.getUser().getUid() == uid);
+        listOfFollowed.setValue(listOfFollowed.getValue());
+    }
+
 
     public boolean isEmpty() {
         if (listOfFollowed == null) return true;

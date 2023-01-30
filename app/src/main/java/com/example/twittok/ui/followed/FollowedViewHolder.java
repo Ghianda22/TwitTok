@@ -38,5 +38,9 @@ public class FollowedViewHolder extends RecyclerView.ViewHolder {
         userName.setText(followedUser.getName());
         userPicture.setImageBitmap(userToShow.getImage());
 
+        followButton.setOnClickListener(clickedView ->
+                userToShow.getOnFollowToggleClickListener().onFollowToggleClick(followedUser.getUid())
+        );
+
     }
 }
