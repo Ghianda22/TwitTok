@@ -3,7 +3,8 @@
     <string name="nav_menu_item_followed">Followed</string>
     <string name="nav_menu_item_newtwok">New Twok</string>
     <string name="nav_menu_item_home">Home</string>
-    <string name="nav_menu_item_profile">My Profile</string>
+    <string name="nav_menu_item_profile">Your Profile</string>
+    <string name="nav_menu_item_map">Twok\'s position</string>
     <string name="view_placeholder_profile_name">Username</string>
     <string name="view_placeholder_profile_image">Profile image</string>
     <string name="view_placeholder_twok">Here the twok text</string>
