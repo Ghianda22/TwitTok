@@ -14,18 +14,31 @@ import com.example.twittok.dto.TwokUserWrapper;
 import java.util.ArrayList;
 
 public class TwokViewAdapter extends RecyclerView.Adapter<TwokViewHolder> {
-
+    // --- ATTRIBUTES ------------------------------------------------------------------------------
     private final LayoutInflater inflater = LayoutInflater.from(ContextSupplier.getContext());
     private ArrayList<TwokUserWrapper> twokArrayList;
 
 
+
+    // --- CONSTRUCTORS ----------------------------------------------------------------------------
     public TwokViewAdapter(ArrayList<TwokUserWrapper> twokArrayList) {
         this.twokArrayList = twokArrayList;
     }
+
+
+
+    // --- GETTERS & SETTERS -----------------------------------------------------------------------
     public void setTwokArrayList(ArrayList<TwokUserWrapper> twokArrayList) {
         this.twokArrayList = twokArrayList;
     }
+    public void setPrevPosition(int prevPosition) {
+        this.prevPosition = prevPosition;
+    }
+    public int getPrevPosition() {
+        return prevPosition;
+    }
 
+    // --- METHODS ---------------------------------------------------------------------------------
     @NonNull
     @Override
     public TwokViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

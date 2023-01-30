@@ -1,31 +1,35 @@
 package com.example.twittok.ui.twokscroll;
-
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
+import com.example.twittok.datasource.ContextSupplier;
 import com.example.twittok.datasource.model.TwokModel;
 import com.example.twittok.dto.TwokUserWrapper;
 
 public class TwokViewHolder extends RecyclerView.ViewHolder {
 
-    //create here all views to be updated in twok_item
+    // --- ATTRIBUTES ----------------------------------------------------------------------------
+
     private TextView twokContent;
     private TextView userName;
     private ImageView userPicture;
     private Button followButton;
     private Button positionButton;
+    private ConstraintLayout userContainer;
     private static final String TAG = "TWOK_HOLDER";
-
 
 
     public TwokViewHolder(@NonNull View itemView) {
@@ -35,17 +39,16 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         userPicture = itemView.findViewById(R.id.userPicture);
         followButton = itemView.findViewById(R.id.followButton);
         positionButton = itemView.findViewById(R.id.positionButton);
+        userContainer = itemView.findViewById(R.id.userContainer);
     }
 
-    public void updateContent(TwokUserWrapper twokData) {
-        TwokModel twokToShow = twokData.getTwok();
-        Log.d(TAG, "updateContent: the author is followed?" + twokData.isFollowed());
-        //extract all twok properties
-        //assign to views the twok properties
-        twokContent.setText(twokToShow.getText());
-        userName.setText(twokToShow.getName());
-        userPicture.setImageBitmap(twokData.getImage());
-        if(twokToShow.getLat() != null & twokToShow.getLon() != null){
+    public void updateContent(TwokUserWrapper twokToShowData) {
+        // implement the onclick function to block the button after a click and call the right api (Follor or unfollow)
+        TwokModel twokToShow = twokToShowData.getTwok();
+        Log.d(TAG, "updateContent: the author is followed?" + twokToShowData.isFollowed());
+
+        // --- POSITION ----------------------------------------------------------------------------
+        if (isValidGeoData(twokToShow.getLat(), twokToShow.getLon())) {
             positionButton.setVisibility(View.VISIBLE);
             positionButton.setOnClickListener(clickedView -> {
                 NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToMapsFragment(
@@ -55,8 +58,132 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
                 );
                 Navigation.findNavController(clickedView).navigate(action);
             });
-        }else positionButton.setVisibility(View.GONE);
-        // followButton -> callIsFollowed if yes display Unfollow, if no Follow
-        // implement the onclick function to block the button after a click and call the right api (Follor or unfollow)
+        } else positionButton.setVisibility(View.GONE);
+
+        // --- NAVIGATE TO USER BOARD --------------------------------------------------------------
+        userContainer.setOnClickListener(clickedView -> {
+            NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToUserBoardFragment(twokToShow.getUid());
+            Navigation.findNavController(clickedView).navigate(action);
+        });
+
+
+        // --- FOLLOW ------------------------------------------------------------------------------
+        styleFollowButton(twokToShowData.isFollowed());
+        followButton.setOnClickListener(view -> {
+            view.setClickable(false);
+            twokToShowData.getOnFollowToggleClickListener().onFollowToggleClick(twokToShow.getUid());
+//            styleFollowButton(twokToShowData.isFollowed());
+        });
+
+// --- TWOK CONTENT --------------------------------------------------------------------------------
+        // --- TWOK PICTURE ------------------------------------------------------------------------
+        userPicture.setImageBitmap(twokToShowData.getImage());
+
+        // --- TWOK NAME ---------------------------------------------------------------------------
+        userName.setText(twokToShow.getName());
+
+        // --- TWOK TEXT ---------------------------------------------------------------------------
+        twokContent.setText(twokToShow.getText());
+
+        // --- TWOK BGCOL --------------------------------------------------------------------------
+        try {
+            twokContent.setBackgroundColor(Color.parseColor("#" + twokToShow.getBgcol()));
+            Log.d("backgroundTest", "BACKGROUND SUCCESS");
+        } catch (IllegalArgumentException e) {
+            try {
+                twokContent.setBackgroundColor(Color.parseColor(twokToShow.getBgcol()));
+                Log.d("backgroundTest", "BACKGROUND SUCCESS");
+            } catch (IllegalArgumentException | StringIndexOutOfBoundsException ex) {
+                Log.d("backgroundTest", "Color for BACKGROUND not applied: " + ex.getLocalizedMessage());
+            }
+        }
+
+        // --- TWOK FONTCOL ------------------------------------------------------------------------
+        try {
+            twokContent.setBackgroundColor(Color.parseColor("#" + twokToShow.getFontcol()));
+            Log.d("fontcolTest", "FONT SUCCESS");
+        } catch (IllegalArgumentException e) {
+            try {
+                twokContent.setBackgroundColor(Color.parseColor(twokToShow.getFontcol()));
+                Log.d("fontcolTest", "FONT SUCCESS");
+            } catch (IllegalArgumentException | StringIndexOutOfBoundsException ex) {
+                Log.d("fontcolTest", "Color for FONT not applied: " + ex.getLocalizedMessage());
+            }
+        }
+
+        // --- TWOK FONTSIZE -----------------------------------------------------------------------
+        switch (twokToShow.getFontsize()) {
+            case 1:
+                twokContent.setTextSize(48);
+                break;
+            case 2:
+                twokContent.setTextSize(60);
+                break;
+            default:
+                twokContent.setTextSize(34);
+                break;
+        }
+
+        // --- TWOK FONTTYPE -----------------------------------------------------------------------
+        switch (twokToShow.getFonttype()) {
+            case 1:
+                twokContent.setTypeface(Typeface.MONOSPACE);
+                break;
+            case 2:
+                twokContent.setTypeface(Typeface.SERIF);
+                break;
+            default:
+                twokContent.setTypeface(Typeface.DEFAULT);
+                break;
+        }
+
+        // --- TWOK HALIGN -------------------------------------------------------------------------
+        switch (twokToShow.getHalign()) {
+            case 0:
+                twokContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                break;
+            case 2:
+                twokContent.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+                break;
+            default:
+                twokContent.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                break;
+        }
+
+        // --- TWOK VALIGN -------------------------------------------------------------------------
+        switch (twokToShow.getValign()) {
+            case 0:
+                twokContent.setGravity(Gravity.TOP);
+                break;
+            case 2:
+                twokContent.setGravity(Gravity.BOTTOM);
+                break;
+            default:
+                twokContent.setGravity(Gravity.CENTER_VERTICAL);
+                break;
+        }
+    }
+
+    public boolean isValidGeoData(Double lat, Double lon) {
+        if (lat == null || lon == null) {
+            return false;
+        }
+        if (lat < -90 || lat > 90) {
+            return false;
+        }
+        if (lon < -180 || lon > 180) {
+            return false;
+        }
+        return true;
+    }
+
+    public void styleFollowButton(boolean isFollowed){
+        if(isFollowed){
+            followButton.setText(R.string.button_unfollow_text);
+            followButton.setBackgroundColor(ContextSupplier.getContext().getColor((R.color.grey)));
+            followButton.setTextColor(ContextSupplier.getContext().getColor(R.color.purple));
+        }else{
+            followButton.setText(R.string.button_follow_text);
+        }
     }
 }
