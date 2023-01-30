@@ -24,7 +24,7 @@ public class FollowedFragment extends Fragment {
     // --- ATTRIBUTES ------------------------------------------
     private FollowedViewModel followedViewModel;
     private FragmentFollowedBinding binding;
-    private static final String TAG = "HOME_FRAGMENT";
+    private static final String TAG = "FOLLOWED_FRAGMENT";
 
     // --- CONSTRUCTORS ---------------------------------------------------------------------------------
     public static FollowedFragment newInstance() {
@@ -58,7 +58,6 @@ public class FollowedFragment extends Fragment {
         followedViewModel.getNoFollowed().observe(
                 getViewLifecycleOwner(),
                 result -> {
-                    Log.d(TAG, "onViewCreated: noFollowed = " + result);
                     binding.noFollowed.setVisibility(View.VISIBLE);
                 }
         );
@@ -66,7 +65,6 @@ public class FollowedFragment extends Fragment {
         followedViewModel.getListOfFollowed().observe(
                 getViewLifecycleOwner(),
                 listOfFollowed -> {
-                    Log.d(TAG, "onViewCreated: noFollowed = " + followedViewModel.getNoFollowed());
                     Log.d(TAG, "onViewCreated: followed list length " + listOfFollowed.size());
                     binding.spinningWheel.setVisibility(View.GONE);
                     if(listOfFollowed.size() > 0)

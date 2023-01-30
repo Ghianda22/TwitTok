@@ -71,17 +71,14 @@ public class HomeFragment extends Fragment {
         homeViewModel.getTwokArrayList().observe(
                 getViewLifecycleOwner(),
                 twokArrayList -> {
-                    Log.d(TAG, "onViewCreated: sono nell'observer ");
                     Log.d(TAG, "onViewCreated: array length " + twokArrayList.size());
                     if (firstTime && twokArrayList.size() > 0) {
-                        Log.d(TAG, "onViewCreated: FIRST TIME");
                         binding.spinningWheel.setVisibility(View.GONE);
                         twokViewAdapter.setTwokArrayList(twokArrayList);
                         viewPager.setAdapter(twokViewAdapter);
                         firstTime = false;
                     }
                     if (twokArrayList.size() > 0 && twokArrayList.size() < bufferSize) {
-                        Log.d(TAG, "onViewCreated: secondo if");
                         homeViewModel.addTwok();
                     }
                     twokViewAdapter.notifyDataSetChanged();
