@@ -1,8 +1,10 @@
 package com.example.twittok.repositories;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.example.twittok.R;
 import com.example.twittok.datasource.ContextSupplier;
 import com.example.twittok.datasource.model.UserModel;
 import com.example.twittok.datasource.network.UserNetworkDataSource;
@@ -34,8 +36,8 @@ public class UserRepository {
     public void getUserFromDb(Integer uid, OnDbResponseListener onDbResponseListener) {
         ListenableFuture<UserEntity> getOp = appDb.userDao().getUserFromUid(uid);
         getOp.addListener(() -> {
-            Log.d(TAG, "getProva: siamo nel DB listener");
             try {
+                Log.d(TAG, "getUserFromDb: " + getOp.get());
                 onDbResponseListener.onDbResponse(getOp.get());
             } catch (ExecutionException | InterruptedException e) {
                 Log.d(TAG, "getUserFromDb: exception class: " + e.getClass() + " - " + e.getMessage());
@@ -45,12 +47,17 @@ public class UserRepository {
     }
 
     public void checkImageVersion(Integer uid, Integer pVersion, OnImageReadyListener onImageReadyListener) {
+        if(pVersion == 0){
+//            Bitmap placeholder = ImageConverter.base64ToBitmap();
+//            onImageReadyListener.onImageReady(placeholder);
+        }else
         getUserFromDb(uid, userEntity -> {
             if (userEntity == null || userEntity.getPversion() < pVersion) {
                 UserNetworkDataSource.callGetPicture(new RequestBody(uid), userResponse -> {
                     insertUser(userResponse);
                     if (userResponse.getPicture() != null) {
                         //implement external library call to assure that base64 is actually an image
+                        Log.d(TAG, "checkImageVersion: user response" + userResponse);
                         Bitmap convertedImage = ImageConverter.base64ToBitmap(userResponse.getPicture());
                         onImageReadyListener.onImageReady(convertedImage);
                     }

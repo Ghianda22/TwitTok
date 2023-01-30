@@ -36,7 +36,7 @@ public class FollowedViewAdapter extends RecyclerView.Adapter<FollowedViewHolder
     @NonNull
     @Override
     public FollowedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.twok_item, parent, false);
+        View view = inflater.inflate(R.layout.user_item, parent, false);
         return new FollowedViewHolder(view);
     }
 

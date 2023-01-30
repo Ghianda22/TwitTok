@@ -14,13 +14,17 @@ import java.util.ArrayList;
 
 public class FollowedViewModel extends ViewModel {
 
-    private static final String TAG = "HOME_VIEWMODEL";
+    private static final String TAG = "FRAGMENT_VIEWMODEL";
     private MutableLiveData<ArrayList<FollowedUserWrapper>> listOfFollowed = new MutableLiveData<>(new ArrayList<>());
+    private MutableLiveData<Boolean> noFollowed = new MutableLiveData<Boolean>(false);
 
     public LiveData<ArrayList<FollowedUserWrapper>> getListOfFollowed() {
         return listOfFollowed;
     }
 
+    public LiveData<Boolean> getNoFollowed() {
+        return noFollowed;
+    }
 
     // --- METHODS ------------------------------------------
     public void addFollowed() {
@@ -31,13 +35,20 @@ public class FollowedViewModel extends ViewModel {
         */
         FollowedUserWrapper followedUserWrapper = new FollowedUserWrapper();
         new FollowedRepository().getListOfFollowed(listOfUsers -> {
-            listOfUsers.forEach(followedUser -> {
-                followedUserWrapper.setUser(followedUser);
-                new UserRepository().checkImageVersion(
-                        followedUser.getUid(), followedUser.getPversion(),
-                        currentImage -> followedUserWrapper.setImage(currentImage));
-            });
-            append(followedUserWrapper);
+            if (listOfUsers.size() > 0) {
+                Log.d(TAG, "addFollowed: list of follwed = " + listOfUsers);
+                listOfUsers.forEach(followedUser -> {
+                    Log.d(TAG, "addFollowed: foreach");
+                    followedUserWrapper.setUser(followedUser);
+                    new UserRepository().checkImageVersion(
+                            followedUser.getUid(), followedUser.getPversion(),
+                            currentImage -> {
+                                Log.d(TAG, "addFollowed: right before the append");
+                                followedUserWrapper.setImage(currentImage);
+                                append(followedUserWrapper);
+                            });
+                });
+            } else noFollowed.setValue(true);
         });
     }
 
