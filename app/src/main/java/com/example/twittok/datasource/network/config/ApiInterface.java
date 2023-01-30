@@ -1,6 +1,7 @@
 package com.example.twittok.datasource.network.config;
 
 import com.example.twittok.datasource.model.IsFollowed;
+import com.example.twittok.datasource.model.ProfileModel;
 import com.example.twittok.datasource.model.SidModel;
 import com.example.twittok.datasource.model.TwokModel;
 import com.example.twittok.datasource.model.UserModel;
@@ -16,15 +17,11 @@ public interface ApiInterface {
     Call<SidModel> register();
 
     @POST("getProfile")
-    Call<UserModel> getProfile(@Body RequestBody body);
+    Call<ProfileModel> getProfile(@Body RequestBody body);
 
     @POST("setProfile")
     Call<Object> setProfile(@Body RequestBody body);
-//    Call<Object> setProfile(
-//            @Field("sid") String sidValue,
-//            @Field("name") String name,
-//            @Field("picture") String picture
-//    );
+
 
     @POST("getTwok")
     Call<TwokModel> getTwok(@Body RequestBody body);
