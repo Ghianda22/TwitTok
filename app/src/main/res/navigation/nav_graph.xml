@@ -63,5 +63,8 @@
         <argument
             android:name="lon"
             app:argType="float" />
+        <argument
+            android:name="username"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -34,9 +34,11 @@ public class MapsFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             float lat = MapsFragmentArgs.fromBundle(getArguments()).getLat();
             float lon = MapsFragmentArgs.fromBundle(getArguments()).getLon();
-            LatLng sydney = new LatLng(lat, lon);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            String author = MapsFragmentArgs.fromBundle(getArguments()).getUsername();
+            LatLng twokPosition = new LatLng(lat, lon);
+            googleMap.addMarker(new MarkerOptions().position(twokPosition).title(author + " was here"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(twokPosition));
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
         }
     };
 

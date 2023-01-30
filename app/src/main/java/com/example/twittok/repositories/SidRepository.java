@@ -8,8 +8,8 @@ import com.example.twittok.listeners.loaded.OnSidLoadedListener;
 public class SidRepository {
 
     //TESTING SID
-    private static String sid = "CN3uYxyOLqMp7PCtSzcG";
-//    private static String sid = SidLocalDataSource.getSid();
+//    private static String sid = "CN3uYxyOLqMp7PCtSzcG";
+    private static String sid = SidLocalDataSource.getSid();
 
     public static void setSid(OnSidLoadedListener onSidLoadedListener) {
         if (sid == null){

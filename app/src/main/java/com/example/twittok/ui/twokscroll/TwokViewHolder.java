@@ -50,7 +50,8 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
             positionButton.setOnClickListener(clickedView -> {
                 NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToMapsFragment(
                         twokToShow.getLat().floatValue(),
-                        twokToShow.getLon().floatValue()
+                        twokToShow.getLon().floatValue(),
+                        twokToShow.getName()
                 );
                 Navigation.findNavController(clickedView).navigate(action);
             });
