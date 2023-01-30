@@ -1,13 +1,10 @@
 package com.example.twittok.ui.home;
 
-import android.graphics.Bitmap;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.twittok.datasource.model.TwokModel;
-import com.example.twittok.utils.wrapper.TwokUserWrapper;
+import com.example.twittok.dto.TwokUserWrapper;
 import com.example.twittok.repositories.FollowedRepository;
 import com.example.twittok.repositories.TwokRepository;
 import com.example.twittok.repositories.UserRepository;

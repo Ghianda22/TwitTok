@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
 import com.example.twittok.datasource.ContextSupplier;
-import com.example.twittok.utils.wrapper.TwokUserWrapper;
+import com.example.twittok.dto.TwokUserWrapper;
 
 import java.util.ArrayList;
 
 public class TwokViewAdapter extends RecyclerView.Adapter<TwokViewHolder> {
 
-    private LayoutInflater inflater = LayoutInflater.from(ContextSupplier.getContext());
+    private final LayoutInflater inflater = LayoutInflater.from(ContextSupplier.getContext());
     private ArrayList<TwokUserWrapper> twokArrayList;
 
 
