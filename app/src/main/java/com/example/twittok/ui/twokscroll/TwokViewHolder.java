@@ -19,6 +19,7 @@ import com.example.twittok.R;
 import com.example.twittok.datasource.ContextSupplier;
 import com.example.twittok.datasource.model.TwokModel;
 import com.example.twittok.dto.TwokUserWrapper;
+import com.example.twittok.ui.home.HomeFragmentDirections;
 
 public class TwokViewHolder extends RecyclerView.ViewHolder {
 
@@ -44,9 +45,7 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateContent(TwokUserWrapper twokToShowData) {
-        // implement the onclick function to block the button after a click and call the right api (Follor or unfollow)
         TwokModel twokToShow = twokToShowData.getTwok();
-        Log.d(TAG, "updateContent: the author is followed?" + twokToShowData.isFollowed());
 
         // --- POSITION ----------------------------------------------------------------------------
         if (isValidGeoData(twokToShow.getLat(), twokToShow.getLon())) {
@@ -63,7 +62,7 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
 
         // --- NAVIGATE TO USER BOARD --------------------------------------------------------------
         userContainer.setOnClickListener(clickedView -> {
-            NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToUserBoardFragment(twokToShow.getUid());
+            NavDirections action = HomeFragmentDirections.actionNavDirectionHomeToUserBoardFragment(twokToShow.getUid());
             Navigation.findNavController(clickedView).navigate(action);
         });
 
@@ -89,11 +88,9 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         // --- TWOK BGCOL --------------------------------------------------------------------------
         try {
             twokContent.setBackgroundColor(Color.parseColor("#" + twokToShow.getBgcol()));
-            Log.d("backgroundTest", "BACKGROUND SUCCESS");
         } catch (IllegalArgumentException e) {
             try {
                 twokContent.setBackgroundColor(Color.parseColor(twokToShow.getBgcol()));
-                Log.d("backgroundTest", "BACKGROUND SUCCESS");
             } catch (IllegalArgumentException | StringIndexOutOfBoundsException ex) {
                 Log.d("backgroundTest", "Color for BACKGROUND not applied: " + ex.getLocalizedMessage());
             }
@@ -102,11 +99,9 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         // --- TWOK FONTCOL ------------------------------------------------------------------------
         try {
             twokContent.setBackgroundColor(Color.parseColor("#" + twokToShow.getFontcol()));
-            Log.d("fontcolTest", "FONT SUCCESS");
         } catch (IllegalArgumentException e) {
             try {
                 twokContent.setBackgroundColor(Color.parseColor(twokToShow.getFontcol()));
-                Log.d("fontcolTest", "FONT SUCCESS");
             } catch (IllegalArgumentException | StringIndexOutOfBoundsException ex) {
                 Log.d("fontcolTest", "Color for FONT not applied: " + ex.getLocalizedMessage());
             }
@@ -166,15 +161,9 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
     }
 
     public boolean isValidGeoData(Double lat, Double lon) {
-        if (lat == null || lon == null) {
-            return false;
-        }
-        if (lat < -90 || lat > 90) {
-            return false;
-        }
-        if (lon < -180 || lon > 180) {
-            return false;
-        }
+        if (lat == null || lon == null) return false;
+        if (lat < -90 || lat > 90) return false;
+        if (lon < -180 || lon > 180) return false;
         return true;
     }
 
