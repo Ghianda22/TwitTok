@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twittok.R;
@@ -18,6 +21,7 @@ public class FollowedViewHolder extends RecyclerView.ViewHolder {
     private Button followButton;
     private TextView userName;
     private ImageView userPicture;
+    private ConstraintLayout userContainer;
 
 
     // --- CONSTRUCTORS ---------------------------------------------------------------------------------
@@ -26,6 +30,7 @@ public class FollowedViewHolder extends RecyclerView.ViewHolder {
         followButton = itemView.findViewById(R.id.followButton);
         userName = itemView.findViewById(R.id.userName);
         userPicture = itemView.findViewById(R.id.userPicture);
+        userContainer = itemView.findViewById(R.id.userContainer);
     }
 
 
@@ -42,6 +47,12 @@ public class FollowedViewHolder extends RecyclerView.ViewHolder {
         followButton.setOnClickListener(clickedView ->
                 userToShow.getOnFollowToggleClickListener().onFollowToggleClick(followedUser.getUid())
         );
+
+        // --- NAVIGATE TO USER BOARD --------------------------------------------------------------
+        userContainer.setOnClickListener(clickedView -> {
+            NavDirections action = FollowedFragmentDirections.actionNavDirectionFollowedToUserBoardFragment(followedUser.getUid());
+            Navigation.findNavController(clickedView).navigate(action);
+        });
 
     }
 }
