@@ -4,6 +4,7 @@ import com.example.twittok.datasource.model.IsFollowed;
 import com.example.twittok.datasource.model.ProfileModel;
 import com.example.twittok.datasource.model.SidModel;
 import com.example.twittok.datasource.model.TwokModel;
+import com.example.twittok.datasource.model.TwokToAdd;
 import com.example.twittok.datasource.model.UserModel;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public interface ApiInterface {
     @POST("getTwok")
     Call<TwokModel> getTwok(@Body RequestBody body);
     @POST("addTwok")
-    Call<Object> addTwok(@Body RequestBody body);
+    Call<Object> addTwok(@Body TwokToAdd body);
     @POST("getPicture")
     Call<UserModel> getPicture(@Body RequestBody body);
     @POST("follow")

@@ -36,26 +36,38 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-maps:18.0.2'
-    def nav_version = "2.5.3"
-    def room_version = "2.5.0"
 
-    //manually addedd
+    // --- NAVIGATION --------------------------------------------------------------------------------
+    def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
+
+    // --- RETROFIT --------------------------------------------------------------------------------
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
+    // --- ROOM ------------------------------------------------------------------------------------
+    def room_version = "2.5.0"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-guava:$room_version"
     implementation "com.google.guava:guava:29.0-android"
 
+    // --- VIEWPAGER 2 -----------------------------------------------------------------------------
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
+    // --- POSITION --------------------------------------------------------------------------------
+    def maps_version = "18.1.0"
+    implementation "com.google.android.gms:play-services-maps:$maps_version"
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 
-    //default
+
+    // --- COLOR PICKER ----------------------------------------------------------------------------
+    def ambilwarna_version = "2.0.1"
+    implementation "com.github.yukuku:ambilwarna:$ambilwarna_version"
+
+    // --- DEFAULT FROM ANDROID --------------------------------------------------------------------
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

@@ -1,13 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/positionAttribute"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.newtwok.NewTwokFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="New Twok" />
+    <ImageView
+        android:id="@+id/positionSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@android:drawable/ic_menu_mylocation"
+        app:layout_constraintBottom_toTopOf="@+id/optionsBar"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/optionsBar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/bgcolButton"
+            style="@android:style/Widget.Material.Light.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BGC"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/fontcolButton"
+            style="@android:style/Widget.Material.Light.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="COlore"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bgcolButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/fontsizeButton"
+            style="@android:style/Widget.Material.Light.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="text size"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fontcolButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/fonttypeButton"
+            style="@android:style/Widget.Material.Light.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="font"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fontsizeButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/positionButton"
+            style="@android:style/Widget.Material.Light.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="POS"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fonttypeButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/sendButton"
+            style="@android:style/Widget.Material.Light.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SND"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/positionButton"
+            app:layout_constraintStart_toEndOf="@+id/positionButton"
+            app:layout_constraintTop_toTopOf="@+id/positionButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/moveLeft"
+        style="@android:style/Widget.Material.Light.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="<--"
+        app:layout_constraintBottom_toBottomOf="@+id/twokBackground"
+        app:layout_constraintEnd_toStartOf="@+id/twokBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/twokBackground" />
+
+    <Button
+        android:id="@+id/moveRight"
+        style="@android:style/Widget.Material.Light.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-->"
+        app:layout_constraintBottom_toBottomOf="@+id/twokBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/twokBackground"
+        app:layout_constraintTop_toTopOf="@+id/twokBackground" />
+
+    <Button
+        android:id="@+id/moveUp"
+        style="@android:style/Widget.Material.Light.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Move text up"
+        app:layout_constraintBottom_toTopOf="@+id/twokBackground"
+        app:layout_constraintEnd_toEndOf="@+id/twokBackground"
+        app:layout_constraintStart_toStartOf="@+id/twokBackground"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/moveDown"
+        style="@android:style/Widget.Material.Light.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Move text down"
+        app:layout_constraintBottom_toTopOf="@+id/optionsBar"
+        app:layout_constraintEnd_toEndOf="@+id/twokBackground"
+        app:layout_constraintStart_toStartOf="@+id/twokBackground"
+        app:layout_constraintTop_toBottomOf="@+id/twokBackground" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/twokBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/optionsBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/twokTextField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@null"
+            android:ems="10"
+            android:inputType="text"
+            android:maxLength="100"
+            android:text="Name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
