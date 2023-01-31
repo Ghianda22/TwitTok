@@ -2,8 +2,11 @@ package com.example.twittok.repositories;
 
 import android.util.Log;
 
+import com.example.twittok.datasource.model.TwokModel;
+import com.example.twittok.datasource.model.TwokToAdd;
 import com.example.twittok.datasource.network.TwokNetworkDataSource;
 import com.example.twittok.datasource.network.config.RequestBody;
+import com.example.twittok.listeners.OnTwokSentListener;
 import com.example.twittok.listeners.loaded.OnTwokLoadedListener;
 
 public class TwokRepository {
@@ -38,4 +41,7 @@ public class TwokRepository {
         });
     }
 
+    public static void addTwok(TwokToAdd twokToAdd, OnTwokSentListener onTwokSentListener) {
+        TwokNetworkDataSource.callAddTwok(twokToAdd, onTwokSentListener);
+    }
 }
