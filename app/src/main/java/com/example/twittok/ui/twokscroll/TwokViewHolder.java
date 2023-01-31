@@ -1,4 +1,5 @@
 package com.example.twittok.ui.twokscroll;
+
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -50,21 +51,15 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         // --- POSITION ----------------------------------------------------------------------------
         if (isValidGeoData(twokToShow.getLat(), twokToShow.getLon())) {
             positionButton.setVisibility(View.VISIBLE);
-            positionButton.setOnClickListener(clickedView -> {
-                NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToMapsFragment(
-                        twokToShow.getLat().floatValue(),
-                        twokToShow.getLon().floatValue(),
-                        twokToShow.getName()
-                );
-                Navigation.findNavController(clickedView).navigate(action);
-            });
+            positionButton.setOnClickListener(clickedView ->
+                    Navigation.findNavController(clickedView).navigate(twokToShowData.getActionToMap())
+            );
         } else positionButton.setVisibility(View.GONE);
 
         // --- NAVIGATE TO USER BOARD --------------------------------------------------------------
-        userContainer.setOnClickListener(clickedView -> {
-            NavDirections action = HomeFragmentDirections.actionNavDirectionHomeToUserBoardFragment(twokToShow.getUid());
-            Navigation.findNavController(clickedView).navigate(action);
-        });
+        userContainer.setOnClickListener(clickedView ->
+                Navigation.findNavController(clickedView).navigate(twokToShowData.getActionToUserboard())
+        );
 
 
         // --- FOLLOW ------------------------------------------------------------------------------
@@ -167,11 +162,11 @@ public class TwokViewHolder extends RecyclerView.ViewHolder {
         return true;
     }
 
-    public void styleFollowButton(boolean isFollowed){
-        if(isFollowed){
+    public void styleFollowButton(boolean isFollowed) {
+        if (isFollowed) {
             followButton.setText(R.string.button_unfollow_text);
             followButton.setBackgroundTintList(ColorStateList.valueOf(ContextSupplier.getContext().getColor((R.color.grey))));
-        }else{
+        } else {
             followButton.setBackgroundTintList(ColorStateList.valueOf(ContextSupplier.getContext().getColor((R.color.purple))));
             followButton.setText(R.string.button_follow_text);
         }

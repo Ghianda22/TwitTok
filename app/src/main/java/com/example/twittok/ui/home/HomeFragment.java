@@ -47,15 +47,28 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
+        // --- VIEW PAGER SETUP --------------------------------------------------------------------
         ViewPager2 viewPager = binding.twokListContainer;
-//        TwokViewAdapter twokViewAdapter = new TwokViewAdapter(/*Pass the function to handle the click*/);
         TwokViewAdapter twokViewAdapter = new TwokViewAdapter(new ArrayList<>());
         viewPager.setAdapter(twokViewAdapter);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if(viewPager.getCurrentItem() > homeViewModel.getSize() - bufferSize) {
+                    homeViewModel.addTwok();
+                    Log.d(TAG, "onPageSelected: ero vicino alla fine");
+                }
+            }
+        });
 
+        // --- VIEW PAGER UPDATE --------------------------------------------------------------------
         firstTime = true;
         Log.d(TAG, "onViewCreated: viewmodel = " + homeViewModel);
         Log.d(TAG, "onViewCreated: viewmodel is empty? " + homeViewModel.isEmpty());
         if (homeViewModel.isEmpty()) {
+//          only in the first screen to be loaded
+//          --> check the sid presence
             if(SidRepository.getSid() == null) {
                 Log.d(TAG, "onViewCreated: sid == null");
                 SidRepository.setSid(sidResponse -> {
@@ -84,25 +97,6 @@ public class HomeFragment extends Fragment {
                     twokViewAdapter.notifyDataSetChanged();
                 }
         );
-
-
-
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                if(viewPager.getCurrentItem() > homeViewModel.getSize() - bufferSize) {
-                    homeViewModel.addTwok();
-                    Log.d(TAG, "onPageSelected: ero vicino alla fine");
-                }
-            }
-        });
-        //NAVIGATION - experiment to test values passing in an action
-        //TODO - pass the uid of the selected user
-//        binding.button.setOnClickListener(clickedView -> {
-//            NavDirections action = com.example.twittok.ui.home.HomeFragmentDirections.actionNavDirectionHomeToUserBoardFragment(uid);
-//            Navigation.findNavController(clickedView).navigate(action);
-//        });
     }
 
 }

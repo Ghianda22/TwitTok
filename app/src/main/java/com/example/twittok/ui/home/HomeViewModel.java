@@ -3,11 +3,13 @@ package com.example.twittok.ui.home;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.NavDirections;
 
 import com.example.twittok.dto.TwokUserWrapper;
 import com.example.twittok.repositories.FollowedRepository;
 import com.example.twittok.repositories.TwokRepository;
 import com.example.twittok.repositories.UserRepository;
+import com.example.twittok.ui.userboard.UserBoardFragmentDirections;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,17 @@ public class HomeViewModel extends ViewModel {
                                             isFollowed.getFollowed(),
                                             uid -> followToggle(uid, isFollowed.getFollowed())
                                     );
+
+                                    // navigation problem handler
+                                    if(twokResponse.getLat() != null){
+                                        NavDirections action = HomeFragmentDirections.actionNavDirectionHomeToMapsFragment(
+                                                twokResponse.getLat().floatValue(),
+                                                twokResponse.getLon().floatValue(),
+                                                twokResponse.getName()
+                                        );
+                                        twokUserWrapper.setActionToMap(action);
+                                    }
+                                    twokUserWrapper.setActionToUserboard(HomeFragmentDirections.actionNavDirectionHomeToUserBoardFragment(twokResponse.getUid()));
                                     append(twokUserWrapper);
 
                                 });
