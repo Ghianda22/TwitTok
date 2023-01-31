@@ -21,26 +21,22 @@ public class HomeViewModel extends ViewModel {
 
 
     public void addTwok() {
-        /* in here prepare the wrapped object
-        --> call Twok
-        --> pass uid to UserRepo and wait for image
-        --> pass uid to FollowedRepo and wait for result
-        --> create TwokUserWrapper and append it to the list
-        */
-        TwokUserWrapper twokUserWrapper = new TwokUserWrapper();
         new TwokRepository().loadTwok(twokResponse -> {
-            twokUserWrapper.setTwok(twokResponse);
+//            --> pass uid to UserRepo and wait for image
             new UserRepository().checkImageVersion(
                     twokResponse.getUid(), twokResponse.getPversion(),
                     updatedImage -> {
-                        twokUserWrapper.setImage(updatedImage);
+//                        --> pass uid to FollowedRepo and wait for result
                         new FollowedRepository().checkIfFollowed(
                                 twokResponse.getUid(),
                                 isFollowed -> {
-                                    twokUserWrapper.setFollowed(isFollowed.getFollowed());
-                                    twokUserWrapper.setOnFollowToggleClickListener(uid -> {
-                                        followToggle(uid, isFollowed.getFollowed());
-                                    });
+//                                    --> set TwokUserWrapper and append it to the list
+                                    TwokUserWrapper twokUserWrapper = new TwokUserWrapper(
+                                            twokResponse,
+                                            updatedImage,
+                                            isFollowed.getFollowed(),
+                                            uid -> followToggle(uid, isFollowed.getFollowed())
+                                    );
                                     append(twokUserWrapper);
 
                                 });

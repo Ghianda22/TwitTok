@@ -22,9 +22,10 @@ public class TwokNetworkDataSource {
         getTwokCall.enqueue(new Callback<TwokModel>() {
             @Override
             public void onResponse(Call<TwokModel> call, Response<TwokModel> response) {
-                Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
-                Log.d(TAG, "onResponse: " + response.body());
-                onTwokLoadedListener.onTwokLoaded(response.body());
+                if(response.isSuccessful()) {
+                    Log.d(TAG, "onResponse: " + response.body());
+                    onTwokLoadedListener.onTwokLoaded(response.body());
+                }else Log.d(TAG, "onResponse: " + response.code() + " - " + response.message());
             }
 
             @Override
