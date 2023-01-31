@@ -28,24 +28,24 @@ public class FollowedViewModel extends ViewModel {
 
     // --- METHODS ------------------------------------------
     public void addFollowed() {
-        /* in here prepare the wrapped object
-        --> call Followed
-        --> pass uid to UserRepo and wait for image
-        --> create TwokUserWrapper and append it to the list
-        */
+//      --> call Followed
         new FollowedRepository().getListOfFollowed(listOfUsers -> {
             if (listOfUsers.size() > 0) {
                 Log.d(TAG, "addFollowed: list of follwed = " + listOfUsers);
                 listOfUsers.forEach(followedUser -> {
-                    FollowedUserWrapper followedUserWrapper = new FollowedUserWrapper();
-                    followedUserWrapper.setOnFollowToggleClickListener(uid -> unfollow(uid));
                     Log.d(TAG, "addFollowed: foreach");
-                    followedUserWrapper.setUser(followedUser);
+//                  --> pass uid to UserRepo and wait for image
                     new UserRepository().checkImageVersion(
                             followedUser.getUid(), followedUser.getPversion(),
                             currentImage -> {
-                                Log.d(TAG, "addFollowed: right before the append");
-                                followedUserWrapper.setImage(currentImage);
+//                              --> create TwokUserWrapper and append it to the list
+                                FollowedUserWrapper followedUserWrapper = new FollowedUserWrapper(
+                                        followedUser,
+                                        currentImage,
+                                        uid -> unfollow(uid),
+                                        FollowedFragmentDirections.actionNavDirectionFollowedToUserBoardFragment(followedUser.getUid())
+                                );
+
                                 append(followedUserWrapper);
                             });
                 });
@@ -53,7 +53,7 @@ public class FollowedViewModel extends ViewModel {
         });
     }
 
-    public void unfollow(Integer uid){
+    public void unfollow(Integer uid) {
         new FollowedRepository().unfollow(uid);
         remove(uid);
     }

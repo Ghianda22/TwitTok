@@ -49,8 +49,11 @@
             android:name="selectedUser"
             app:argType="integer" />
         <action
-            android:id="@+id/action_userBoardFragment_to_mapsFragment2"
+            android:id="@+id/action_userBoardFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_userBoardFragment_self"
+            app:destination="@id/userBoardFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"

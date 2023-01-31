@@ -2,6 +2,8 @@ package com.example.twittok.dto;
 
 import android.graphics.Bitmap;
 
+import androidx.navigation.NavDirections;
+
 import com.example.twittok.datasource.model.UserModel;
 import com.example.twittok.listeners.click.OnFollowToggleClickListener;
 
@@ -11,12 +13,19 @@ public class FollowedUserWrapper {
     private UserModel user;
     private Bitmap image;
     private OnFollowToggleClickListener onFollowToggleClickListener;
+    private NavDirections actionToUserboard;
 
 
     // --- CONSTRUCTORS ------------------------------------------
     public FollowedUserWrapper() {
     }
 
+    public FollowedUserWrapper(UserModel user, Bitmap image, OnFollowToggleClickListener onFollowToggleClickListener, NavDirections actionToUserboard) {
+        this.user = user;
+        this.image = image;
+        this.onFollowToggleClickListener = onFollowToggleClickListener;
+        this.actionToUserboard = actionToUserboard;
+    }
 
     // --- GETTERS & SETTERS ------------------------------------------
     public UserModel getUser() {
@@ -38,9 +47,15 @@ public class FollowedUserWrapper {
         this.onFollowToggleClickListener = onFollowToggleClickListener;
     }
 
+    public NavDirections getActionToUserboard() {
+        return actionToUserboard;
+    }
 
+    public void setActionToUserboard(NavDirections actionToUserboard) {
+        this.actionToUserboard = actionToUserboard;
+    }
 
-// --- METHODS ------------------------------------------
+    // --- METHODS ------------------------------------------
     @Override
     public String toString() {
         return "FollowedUserWrapper{" +

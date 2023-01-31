@@ -2,8 +2,11 @@ package com.example.twittok.dto;
 
 import android.graphics.Bitmap;
 
+import androidx.navigation.NavDirections;
+
 import com.example.twittok.datasource.model.TwokModel;
 import com.example.twittok.listeners.click.OnFollowToggleClickListener;
+import com.google.common.reflect.ClassPath;
 
 public class TwokUserWrapper {
     // --- ATTRIBUTES ------------------------------------------
@@ -11,6 +14,8 @@ public class TwokUserWrapper {
     private Bitmap image;
     private boolean isFollowed;
     private OnFollowToggleClickListener onFollowToggleClickListener;
+    private NavDirections actionToMap;
+    private NavDirections actionToUserboard;
 
     // --- CONSTRUCTORS ------------------------------------------
     public TwokUserWrapper() {
@@ -21,7 +26,6 @@ public class TwokUserWrapper {
         this.isFollowed = isFollowed;
         this.onFollowToggleClickListener = onFollowToggleClickListener;
     }
-
 
     // --- GETTERS & SETTTERS -------------------------------------------------------
     public TwokModel getTwok() {
@@ -47,5 +51,21 @@ public class TwokUserWrapper {
     }
     public void setOnFollowToggleClickListener(OnFollowToggleClickListener onFollowToggleClickListener) {
         this.onFollowToggleClickListener = onFollowToggleClickListener;
+    }
+
+    public NavDirections getActionToMap() {
+        return actionToMap;
+    }
+
+    public void setActionToMap(NavDirections actionToMap) {
+        this.actionToMap = actionToMap;
+    }
+
+    public NavDirections getActionToUserboard() {
+        return actionToUserboard;
+    }
+
+    public void setActionToUserboard(NavDirections actionToUserboard) {
+        this.actionToUserboard = actionToUserboard;
     }
 }
